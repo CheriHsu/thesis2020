@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>資訊視覺化研究</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/test_speed.css">
+    <link rel="stylesheet" type="text/css" href="css/mapbox-gl.css">
+    <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+
+    <script src="./js/echarts4.min.js"></script>
+    <script src="./js/echarts-gl11.min.js"></script>
+    <script src="./js/simplex-noise.js"></script>
+    <script src="./js/mapbox-gl.js"></script>
+<!--     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' /> -->
+    <!-- <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+    <script src="./js/popper.js"></script>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>  
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+</head>
+<script type="text/javascript">
+    $(function(){
+        // test
+        // $('#step_3_div, #alpha_div, #alpha_descript_div,#alpha_task_div, #slider_question_div').show();
+        // $('#agree_div,#step_1_div').hide();
+    })
+</script>
+<body>
+    <!-- 實驗問卷說明 -->
+    <div id="agree_div" class="container left _divStyle">
+        <h2 class="center">測試實驗問卷說明</h2>
+        <p>親愛的受測者您好：<br>
+            這是一份由國立臺北科技大學互動設計系，研究關於資訊視覺化的顯著性認知與介面操作實驗調查，<br>
+            希望透過本實驗問卷探討三維數據顯示之視覺閉合感知介面。主要調查對象為18歲以上之成人。<br>   
+            問卷內容分為三個部分:基本資料、視覺認知(閉合之靈活性、感知速度、空間方位)、三維資料視覺介面模型實驗題，感謝您撥冗填答。<br><!-- 約需30至40分鐘 -->
+            本問卷採不記名，以編碼辨識個人的方式，並盡力維護您的隱私及善盡保密責任。<br>
+            此研究未來發表採整體分析，您不會被辨識出，將發表於學位論文，亦無衍生的商業利益。<br>
+            在此感謝您的熱心與配合，為資訊視覺化研究盡一份心力：）<br>
+        <!-- 請您自由決定是否填寫，亦可中途不填寫，無需感到壓力。<br> -->
+        </p>
+        <p></p>
+        <p class="center">為感謝填答，於基本資料留下姓名與Email信箱聯絡方式並完成之有效問卷者，<br>將會抽出20名幸運兒，贈送價值新台幣100元整全家禮卷。</p>
+        <!-- 活動於5月31日截止，將與中獎者聯繫 -->
+        <p class="right">
+            國立臺北科技大學 互動設計系<br>
+            碩士研究生：徐千惠<br>
+            指導教授：吳可久 博士<br>
+            Email: <a href="mailto:t107ac8512@ntut.org.tw">t107ac8512@ntut.org.tw</a><br>
+            109年05月<br>
+        </p>
+
+        <b class='red'>注意事項:</b>
+        <ol>
+            <li>為確保問卷實驗有效性，請使用<span class='red'>桌機</span>或<span class='red'>筆電電腦</span>，並確定<span class='red'>網路環境</span>穩定來進行作答。</li>
+            <li>操作作答會使用到<span class='red'>滑鼠</span>，請先確認好設備再進行問卷作答。</li>
+            <li>視覺認知與實驗題型作答會進行<span class='red'>時間計時</span>，因此需要您撥空約20~30分鐘左右不被打擾的時間進行做答。</li>
+            <li>作答過程途中<span class='red'>請勿返回上一頁作答</span>，謝謝您的配合。</li>
+            <li>瀏覽建議使用Chrome瀏覽器，1024*768以上之解析度。</li>
+        </ol>
+
+        <p class="center">※如同意填寫，請點選「同意進行問卷實驗」按鈕於下一頁作答</p>
+        <input id="agree_btn" data-test_number="1" class="btn btn-primary center" type="button" name="agree_btn" value="同意進行問卷實驗">
+    </div>
+
+    <!-- step1基本資料 -->
+    <div id="step_1_div" class="container left _divStyle" style="display: none;">
+        <h3 class="center">一、基本資料</h3>
+        <form>
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-2 col-form-label">1. 姓名:</label>
+                <div class="col-sm-10">
+                    <!-- <input name="name" type="input" id="name" class="form-control col-sm-5 form-control-sm" value="" placeholder=""> -->
+                    <input name="name" type="input" id="name" class="form-control col-sm-5 form-control-sm" value="" placeholder="非必填，欲參加抽獎者請填寫">
+                </div>
+            </div>
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-2 col-form-label">2. 手機:</label>
+                <div class="col-sm-10">
+                    <!-- <input name="phone" type="input" id="phone" class="form-control col-sm-5 form-control-sm" value="" placeholder=""> -->
+                    <input name="phone" type="input" id="phone" class="form-control col-sm-5 form-control-sm" value="" placeholder="非必填，欲參加抽獎者請填寫">
+                </div>
+            </div>
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-2 col-form-label">3. E-mail: </label>
+                <div class="col-sm-10">
+                    <!-- <input name="email" type="email" id="email" class="form-control col-sm-5 form-control-sm" value="" placeholder=""> -->
+                     <input name="email" type="email" id="email" class="form-control col-sm-5 form-control-sm" value="" placeholder="非必填，欲參加抽獎者請填寫">
+                </div>
+            </div>
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-2 col-form-label">4. 性別: </label>
+                <div class="col-sm-10">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="sex" type="radio" id="sex_m" class="custom-check-input" value="1">
+                        <label for="sex_m" class="custom-check-label">  生理男</label>
+                    </div>    
+                    <div class="custom-radio custom-control-inline">
+                        <input name="sex" type="radio" id="sex_f" class="custom-check-input" value="2">
+                        <label for="sex_f" class="custom-check-label">  生理女</label> 
+                    </div>    
+                </div>
+            </div>
+
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-2 col-form-label">5. 年齡: </label>
+                <div class="col-sm-10">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_0" class="custom-check-input" value="0">
+                        <label for="age_0" class="custom-check-label">  18歲以下</label>
+                    </div>   
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_1" class="custom-check-input" value="1">
+                        <label for="age_1" class="custom-check-label">  18~24</label>
+                    </div>    
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_2" class="custom-check-input" value="2">
+                        <label for="age_2" class="custom-check-label">  25~34</label> 
+                    </div>   
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_3" class="custom-check-input" value="3">
+                        <label for="age_3" class="custom-check-label">  35~44</label> 
+                    </div>  
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_4" class="custom-check-input" value="4">
+                        <label for="age_4" class="custom-check-label">  45~54</label> 
+                    </div>  
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_5" class="custom-check-input" value="5">
+                        <label for="age_5" class="custom-check-label">  55~64</label> 
+                    </div>  
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_6" class="custom-check-input" value="6">
+                        <label for="age_6" class="custom-check-label">  65~74</label> 
+                    </div>  
+                    <div class="custom-radio custom-control-inline">
+                        <input name="age" type="radio" id="age_7" class="custom-check-input" value="7">
+                        <label for="age_7" class="custom-check-label">  75 歲以上</label> 
+                    </div>   
+                </div>
+            </div>
+
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-2 col-form-label">6. 教育程度:  </label>
+                <div class="col-sm-10">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="edu" type="radio" id="edu_1" class="custom-check-input" value="1">
+                        <label for="edu_1" class="custom-check-label">  國中及以下</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="edu" type="radio" id="edu_2" class="custom-check-input" value="2">
+                        <label for="edu_2" class="custom-check-label">  高中職</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="edu" type="radio" id="edu_3" class="custom-check-input" value="3">
+                        <label for="edu_3" class="custom-check-label">  專科</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="edu" type="radio" id="edu_4" class="custom-check-input" value="4">
+                        <label for="edu_4" class="custom-check-label">  大學</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="edu" type="radio" id="edu_5" class="custom-check-input" value="5">
+                        <label for="edu_5" class="custom-check-label">  碩士</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="edu" type="radio" id="edu_6" class="custom-check-input" value="6">
+                        <label for="edu_6" class="custom-check-label">  博士</label> 
+                    </div>
+                </div>
+            </div>  
+
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-2 col-form-label">7. 專業領域:  </label>
+                <div class="col-sm-10">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="skill" type="radio" id="skill_1" class="custom-check-input" value="1">
+                        <label for="skill_1" class="custom-check-label">  藝術設計</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="skill" type="radio" id="skill_2" class="custom-check-input" value="2">
+                        <label for="skill_2" class="custom-check-label">  理工</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="skill" type="radio" id="skill_3" class="custom-check-input" value="3">
+                        <label for="skill_3" class="custom-check-label">  醫學</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="skill" type="radio" id="skill_4" class="custom-check-input" value="4">
+                        <label for="skill_4" class="custom-check-label">  管理</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="skill" type="radio" id="skill_5" class="custom-check-input" value="5">
+                        <label for="skill_5" class="custom-check-label">  人文社會</label> 
+                    </div>
+                    <div class="form-group row col-xs-12 col-md-12">
+                        <div class="custom-radio custom-control-inline">
+                            <input name="skill" type="radio" id="skill_6" class="custom-check-input" value="6">
+                            <label for="skill_6" class="custom-check-label" style="width: 120px;">  其他</label> 
+                            <div class="col-sm-10">
+                                <input name="skill_other" type="input" id="skill_7" class="form-control custom-check-input col-sm-5 form-control-sm" value="" placeholder="其他領域">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-3 col-form-label">8. 使用電腦頻率: </label>
+                <div class="col-sm-9">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="use" type="radio" id="use_1" class="custom-check-input" value="1">
+                        <label for="use_1" class="custom-check-label">  經常</label>
+                    </div>    
+                    <div class="custom-radio custom-control-inline">
+                        <input name="use" type="radio" id="use_2" class="custom-check-input" value="2">
+                        <label for="use_2" class="custom-check-label">  偶爾</label> 
+                    </div> 
+                    <div class="custom-radio custom-control-inline">
+                        <input name="use" type="radio" id="use_3" class="custom-check-input" value="3">
+                        <label for="use_3" class="custom-check-label">  很少</label> 
+                    </div>    
+                </div>
+            </div>
+
+            <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-3 col-form-label">9. 現在操作使用之裝置: </label>
+                <div class="col-sm-9">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="device" type="radio" id="device_1" class="custom-check-input" value="1">
+                        <label for="device_1" class="custom-check-label">  桌上型電腦</label>
+                    </div>    
+                    <div class="custom-radio custom-control-inline">
+                        <input name="device" type="radio" id="device_2" class="custom-check-input" value="2">
+                        <label for="device_2" class="custom-check-label">  筆記型電腦</label> 
+                    </div>    
+                </div>
+            </div>
+
+            <!-- <div class="form-group row col-xs-12 col-md-12">
+                <label class="col-sm-3 col-form-label">10. 眼睛是否患有辨色力異常: </label>
+                <div class="col-sm-9">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="disease" type="radio" id="disease_1" class="custom-check-input" value="1">
+                        <label for="disease_1" class="custom-check-label">  無</label>
+                    </div>    
+                    <div class="custom-radio custom-control-inline">
+                        <input name="disease" type="radio" id="disease_2" class="custom-check-input" value="2">
+                        <label for="disease_2" class="custom-check-label">  不曉得</label> 
+                    </div> 
+                    <div class="custom-radio custom-control-inline">
+                        <input name="disease" type="radio" id="disease_3" class="custom-check-input" value="3">
+                        <label for="disease_3" class="custom-check-label">  有</label> 
+                            <div class="col-sm-10">
+                                <input name="disease" type="input" id="disease_4" class="form-control custom-check-input col-sm-12 form-control-sm" value="" placeholder="列出如：色盲、色弱">
+                            </div>
+                    </div>    
+                </div>
+            </div> -->
+
+        </form>       
+        <input id="start_btn" data-test_number="1" class="btn btn-primary center" type="button" name="start_btn" value="開始進行量表問卷">
+    </div>
+
+    <!-- step2題目開始 -->
+    <div id="step_2_div" class="_divStyle" style="display: none;">
+        <!-- 視覺認知測驗 -->
+        <div id="cf_div">
+            <!-- CF說明 -->
+            <div id="cf_descript_div" class="container">
+                <!-- 視覺認知(閉合之靈活性、感知速度、空間方位) -->
+                <!--        CF-閉合之靈活性 CF-1 隱藏圖形測試
+                            P-感知速度 P-3 相同圖片測試
+                            S-空間方位 S-1卡片旋轉測試
+                            透明度 -->
+                <h3 class="center">視覺認知量表-閉合之靈活性</h3>
+                <h3 class="center">隱藏圖形測試作答說明</h3>
+                <p>
+                    在分別標示為字母A、B、C、D和E的五個圖形中，有一個可以圖案樣式的題中吻合被找到。<br>
+                    選擇你在該題圖案上找到對應的圖形。<br>
+                    備註: 在五個圖形中，<span class="red">只有一個圖形會以同樣的方向與大小</span>隱藏在每題圖案中。<br>
+                    以下為兩個範例:<br>
+                </p> 
+                <div id="cf1_sample" class="sample_position">
+                    <img src="images/cf1_sample.jpg">
+                </div>
+                <div class="center">
+                    <label>範例1：</label>
+                    <img src="images/cf1_ans1.jpg">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa_sample" type="radio" id="aa_1" class="custom-check-input" value="1" checked>
+                        <label for="aa_1" class="custom-check-label">A</label>
+                    </div>  
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa_sample" type="radio" id="aa_2" class="custom-check-input" value="2" disabled>
+                        <label for="aa_2" class="custom-check-label">B</label> 
+                    </div> 
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa_sample" type="radio" id="aa_3" class="custom-check-input" value="3" disabled>
+                        <label for="aa_3" class="custom-check-label">C</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa_sample" type="radio" id="aa_4" class="custom-check-input" value="4" disabled>
+                        <label for="aa_4" class="custom-check-label">D</label> 
+                    </div> 
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa_sample" type="radio" id="aa_5" class="custom-check-input" value="5" disabled>
+                        <label for="aa_5" class="custom-check-label">E</label>
+                    </div> 
+                    <p>範例題1: 選擇A為符合之圖形</p>
+                </div>
+                <div class="center">
+                    <label>範例2:</label>
+                    <img src="images/cf1_ans2.jpg">
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa2_sample" type="radio" id="aa2_1" class="custom-check-input" value="1" disabled>
+                        <label for="aa2_1" class="custom-check-label">A</label>
+                    </div>  
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa2_sample" type="radio" id="aa2_2" class="custom-check-input" value="2" disabled>
+                        <label for="aa2_2" class="custom-check-label">B</label> 
+                    </div> 
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa2_sample" type="radio" id="aa2_3" class="custom-check-input" value="3" disabled>
+                        <label for="aa2_3" class="custom-check-label">C</label> 
+                    </div>
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa2_sample" type="radio" id="aa2_4" class="custom-check-input" value="4" checked>
+                        <label for="aa2_4" class="custom-check-label">D</label> 
+                    </div> 
+                    <div class="custom-radio custom-control-inline">
+                        <input name="aa2_sample" type="radio" id="aa2_5" class="custom-check-input" value="5" disabled>
+                        <label for="aa2_5" class="custom-check-label">E</label>
+                    </div> 
+                    <p>範例題2: 選擇B為符合之圖形</p>
+                </div>
+                <p class="center">測試時間3分鐘，共16題。<br>
+                    如找不到圖形可忽略該題，無須猜題作答。</p>
+                <input id="start_cf_task_btn" data-task="" class="btn btn-primary center" type="button" name="" value="進行測驗">
+            </div>
+
+            <!-- CF測驗開始 -->
+            <div id="cf_task_div" class="container"  style="display: none;">
+                <div id="" class="position_fixed">
+                    
+<!--                     <div class=" center">測驗說明: 在A、B、C、D、E五個圖形中，<span class="red">只有一個圖形會以同樣的方向與大小</span>隱藏在每題圖案中。<br>
+                    如找不到圖形可忽略該題，無須猜題作答。答題結束可按下“進行下一測驗”按鈕。</div> -->
+                    <img src="images/cf1_sample.jpg">
+                </div>
+                <div class="top_space"></div>
+                <i class="fa fa-info-circle"  data-toggle="tooltip" data-html="true" 
+                    title="<div class=' center' style='width:200px;'>測驗說明: 在A、B、C、D、E五個圖形中，<span class='red'>只有一個圖形會以同樣的方向與大小</span>隱藏在每題圖案中。<br>
+                    如找不到圖形可忽略該題，無須猜題作答。</div>">任務提示</i>
+                <div>作答時間: <span class="counttime"><!-- append --></span></div>
+                <div id="cf_items">
+                    <!-- append -->
+                </div>
+                <p class="center">答題結束可按“下一個測驗”按鈕進行下一部分測驗說明。</p>
+                <input id="start_p_btn" data-task="p" class="btn btn-primary center" type="button" name="" value="下一個測驗">
+            </div>
+        </div>
+
+        <div id="p_div" style="display: none;">
+            <!-- P說明 -->
+            <div id="p_descript_div" class="container">
+                <!-- 視覺認知(閉合之靈活性、感知速度、空間方位) -->
+                <!--        CF-閉合之靈活性 CF-1 隱藏圖形測試
+                            P-感知速度 P-3 相同圖片測試
+                            S-空間方位 S-1卡片旋轉測試
+                            透明度 -->
+                <h3 class="center">視覺認知量表-感知速度</h3>
+                <h3 class="center">相同圖片測試作答說明</h3>
+                <p>
+                    每題黑色直線的左側是圖題，需在右方A、B、C、D、E的五個圖案中，選擇與左邊相匹配的圖案。<br>
+                    每題選擇<span class="red">只有一個圖案</span>與左邊圖題的圖<span class="red">相匹配</span>。<br>
+                    
+                    參考下面一個範例：<br>
+                </p>
+                <div id="p_sample" class="form-inline">
+                    <!-- <img id="p_sample_img" src="images/p_sample.jpg"> -->
+                    <div id="" class="m-a">
+                        <div class="p_sample_group">
+                            <div>範例:</div>
+                            <div class="pic_w"><img class="w100p" id="p1_img" src="images/p_sample.jpg"></div>
+                            <div class="p_radio">                        
+                                <div class="custom-radio custom-control-inline">
+                                    <input name="ps" type="radio" id="ps_1" class="custom-check-input" value="1" disabled>
+                                    <label for="ps_1" class="custom-check-label">A</label>
+                                </div>
+                                <div class="custom-radio custom-control-inline">
+                                    <input name="ps" type="radio" id="ps_2" class="custom-check-input" value="2" disabled>
+                                    <label for="ps_2" class="custom-check-label">B</label> 
+                                </div>
+                                <div class="custom-radio custom-control-inline">
+                                    <input name="ps" type="radio" id="ps_3" class="custom-check-input" value="3" checked="">
+                                    <label for="ps_3" class="custom-check-label">C</label>
+                                </div>
+                                <div class="custom-radio custom-control-inline">
+                                    <input name="ps" type="radio" id="ps_4" class="custom-check-input" value="4" disabled>
+                                    <label for="ps_4" class="custom-check-label">D</label> 
+                                </div> 
+                                <div class="custom-radio custom-control-inline">
+                                    <input name="ps" type="radio" id="ps_5" class="custom-check-input" value="5" disabled>
+                                    <label for="ps_5" class="custom-check-label">E</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="center">範例題: 選擇C為最匹配之圖案</p>
+                <p class="center">測試時間為1分30秒，請盡所能速度答題。 <br>如找不到匹配圖案可忽略該題，無須猜題。</p>
+                <input id="start_p_task_btn" data-task="p" class="btn btn-primary center" type="button" name="" value="進行測驗">
+
+            </div>
+
+            <!-- P測驗開始 -->
+            <div id="p_task_div" class="container"  style="display: none;">
+<!--                 <div class="">
+                    <div class=" center">
+                        測驗說明:每題黑色直線的左側是圖題，需在右方A、B、C、D、E的五個圖案中，選擇與左邊相匹配的圖案。
+                        每題選擇<span class="red">只有一個圖案</span>與左邊圖題的圖<span class="red">相匹配</span>。<br>
+                        如找不到相同圖形可忽略該題，無須猜題作答。答題結束可按下“進行下一測驗”按鈕。
+                    </div>
+                </div> -->
+                <i class="fa fa-info-circle"  data-toggle="tooltip" data-html="true" 
+                    title="<div class=' center' style='width:200px;'>測驗說明:每題黑色直線的左側是圖題，需在右方A、B、C、D、E的五個圖案中，選擇與左邊相匹配的圖案。
+                        每題選擇<span class='red'>只有一個圖案</span>與左邊圖題的圖<span class='red'>相匹配</span>。<br>
+                        如找不到相同圖形可忽略該題，無須猜題作答。</div>">任務提示</i>
+                <div>作答時間: <span class="counttime"><!-- append --></span></div>
+
+                <div id="p_items" class="">
+                    <!-- append -->
+                </div>
+                <p class="center">答題結束可按“下一個測驗”按鈕進行下一部分測驗說明。</p>
+                <input id="start_s_btn" data-task="s" class="btn btn-primary center" type="button" name="" value="下一個測驗">
+            </div>
+        </div>
+
+        <div id="s_div" style="display: none;">
+            <!-- S說明 -->
+            <div id="s_descript_div" class="container">
+                <!-- 視覺認知(閉合之靈活性、感知速度、空間方位) -->
+                <!--        CF-閉合之靈活性 CF-1 隱藏圖形測試
+                            P-感知速度 P-3 相同圖片測試
+                            S-空間方位 S-1卡片旋轉測試
+                            透明度 -->
+                <h3 class="center">視覺認知量表-空間方位</h3>
+                <h3 class="center">卡片旋轉測試作答說明</h3>
+
+                <div>
+                    這是測試您對查看圖形旋轉與翻轉的差異能力。下方有五張三角形的圖，<br>
+                    <div class="center"><img id="s_sample_img" src="images/s_sample1.jpg"></div>
+                    都算是<span class="red">「相同(S)」</span>三角形，只是有不同的<span class="red">「平面旋轉」</span>樣貌。<br>
+                    現在看下面的兩張圖： <br>
+                    <div class="center"><img id="s_sample_img" src="images/s_sample2.jpg"></div>
+                    這兩張則為<span class="red">「不相同(D)」</span>三角形，左方三角形必須透過<span class="red">「鏡射翻轉」</span>才成為右方的三角形。<br>
+                    正式測驗每題的左側是圖題，需辨識右方八個圖案是否與圖題相同。<br>
+                    如果與圖題「相同」，請選擇「S」，「不相同」則選擇「D」。<br>
+                    參考下面一個測驗範例：
+                </div>
+                <div id="s_sample" class="form-inline">
+                    <div class="center">
+                        <img id="s_sample_img" class="w100p" src="images/s_sample.jpg">
+                        <p>範例題1: 左數第1.3.4與圖題相同，選擇Ｓ；其餘不相同選擇Ｄ。</p>
+                    </div>
+                </div>
+                <p class="center">測試時間為3分鐘，請盡所能速度答題。 <br>如無法解答可忽略該題，無須猜題。</p>
+                <input id="start_s_task_btn" data-task="s" class="btn btn-primary center" type="button" name="" value="進行測驗">
+
+            </div>
+
+            <!-- S測驗開始 -->
+            <div id="s_task_div" class="container"  style="display: none;">
+<!--                 <div class="center">
+                    測驗說明:每題黑色直線的左側是圖題，需辨識右方八個圖案是否與圖題相同或不同。<br>
+                    圖形若<span class="red">「平面旋轉」</span>，請選擇<span class="red">相同“S”</span>，若為<span class="red">「鏡射翻轉」</span>則選擇<span class="red">不相同“D”</span>。<br>
+                    如無法解答可忽略該題，無須猜題作答。答題結束可按下“進行下一測驗”按鈕。
+                </div> -->
+                <i class="fa fa-info-circle"  data-toggle="tooltip" data-html="true" 
+                    title="<div class=' center' style='width:200px;'>測驗說明:每題黑色直線的左側是圖題，需辨識右方八個圖案是否與圖題相同或不同。<br>
+                    圖形若<span class='red'>「平面旋轉」</span>，請選擇<span class='red'>相同“S”</span>，若為<span class='red'>「鏡射翻轉」</span>則選擇<span class='red'>不相同“D”</span>。<br>
+                    如無法解答可忽略該題，無須猜題作答。</div>">任務提示</i>
+                <div>作答時間: <span class="counttime"><!-- append --></span></div>
+
+                <div id="s_items" class="">
+                    <!-- append -->
+                </div>
+                <p class="center">答題結束可按“下一個測驗”按鈕進行下一部分測驗說明。</p>
+                <input id="start_alpha_btn" data-task="opacity" class="btn btn-primary center" type="button" name="" value="下一個測驗">
+            </div>
+        </div>
+        
+        <div class="stopwatch displaynone"><!-- append --></div> <!-- hide count -->
+    </div>
+    <!-- step3題目開始 -->
+    <div id="step_3_div" class="" style="display: none;">
+        <!-- 不透明任務實驗 -->
+        <div id="alpha_div"  style="display: none;">
+            <!-- alpha說明 -->
+            <div id="alpha_descript_div" class="_divStyle container">
+                <h3 class="center">三維地理空間資料視覺化介面實驗</h3>
+                <h3 class="center">操作說明</h3>
+                <p>
+                    您會看到在虛擬三維的地理空間中，呈現了無人機在都市中探測了溫度數據，<br>回傳量測的位置與溫度高低，將會以包含溫度顏色的圓形點視覺化呈現在道路與建築物之間。<br>
+                </p>
+                    <div class="center">
+                        <img style="width: 500px" src="images/task_sample.jpg">
+                    </div>
+                    <div class="center"><img  style="width: 500px" src="images/temperature_slider.jpg"></div>
+
+                    <!-- <div class="center">
+                            <img src="images/operator.jpg">
+                        </div> -->
+                <p>
+                <!--  將滑鼠游標停在地圖的畫面中，長壓滑鼠左鍵並前後左右移動可平移查看地圖。<br>長壓滑鼠左鍵前後左右移動加上長壓鍵盤Ctrl鍵，可旋轉地圖觀看不同視角 -->
+                </p>
+                <p class="center">每一個資料視覺化地圖將有七個提問。<br>
+                請根據實驗呈現的四種地圖，依據任務操作與選擇答案作答。</p>
+                <input id="start_alpha_task_btn" data-task="" class="btn btn-primary center" type="button" name="" value="進行測驗">
+            </div>
+
+            <!-- alpha實驗開始 -->
+            <div id="alpha_task_div" class="_divStyle" style="display: none;">
+                <div id='map'><!-- append --></div>
+                <div id='map1'><!-- append --></div>
+                <div id='map2'><!-- append --></div>
+                <div id='map3'><!-- append --></div>
+                <div id='map4'><!-- append --></div>
+                
+                <div id="task_map1" class="task_map">   
+                    <h6>地圖一</h6>
+                    <div id="map1_q1" class=" padding10">
+                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <div>
+                            <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b1" value="1"><label for="map1_q1_b1">  建築Ａ</label>
+                            <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b2" value="2"><label for="map1_q1_b2">  建築B</label> 
+                            <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b3" value="3"><label for="map1_q1_b3">  建築C</label>
+                            <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b4" value="4"><label for="map1_q1_b4">  不知道</label> 
+                        </div>
+                    </div>
+                    <div id="map1_q2" class="map1 padding10">
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <div>                        
+                            <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b1" value="1"><label for="map1_q2_b1">  建築Ａ</label>
+                            <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b2" value="2"><label for="map1_q2_b2">  建築B</label> 
+                            <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b3" value="3"><label for="map1_q2_b3">  建築C</label>
+                            <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b4" value="4"><label for="map1_q2_b4">  不知道</label> 
+                        </div>
+                    </div>
+                    <div id="map1_q3" class="map1 padding10">
+                        <b>Q3. 在呈現所量測多處聚集高溫度的熱團中，離建築最遠的熱團，是位在哪一棟建築前方？ </b> 
+                        <div>
+                            <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b1" value="1"><label for="map1_q3_b1">  建築Ａ</label>
+                            <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b2" value="2"><label for="map1_q3_b2">  建築B</label> 
+                            <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b3" value="3"><label for="map1_q3_b3">  建築C</label>
+                            <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b4" value="4"><label for="map1_q3_b4">  不知道</label> 
+                        </div>
+                    </div>
+
+                    <div id="map1_q4" class="map1 padding10">
+                        <b>Q4. 我覺得半透明的溫度顏色，讓我輕易分辨溫度高低的分佈範圍。</b> 
+                        <div class="sus">                        
+                            <label for="map1_q4_b1">不同意  <input name="map1_q4" class="map_radio" type="radio" id="map1_q4_b1" value="1"> 1</label>
+                            <input name="map1_q4" class="map_radio" type="radio" id="map1_q4_b2" value="2"><label for="map1_q4_b2">  2</label> 
+                            <input name="map1_q4" class="map_radio" type="radio" id="map1_q4_b3" value="3"><label for="map1_q4_b3">  3</label>
+                            <input name="map1_q4" class="map_radio" type="radio" id="map1_q4_b4" value="4"><label for="map1_q4_b4">  4</label> 
+                            <input name="map1_q4" class="map_radio" type="radio" id="map1_q4_b5" value="5"><label for="map1_q4_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map1_q5" class="map1 padding10">
+                        <b>Q5. 我覺得半透明的溫度顏色，讓我輕易辨識背後建築的高低。</b> 
+                        <div class="sus">                        
+                            <label for="map1_q5_b1">不同意  <input name="map1_q5" class="map_radio" type="radio" id="map1_q5_b1" value="1"> 1</label>
+                            <input name="map1_q5" class="map_radio" type="radio" id="map1_q5_b2" value="2"><label for="map1_q5_b2">  2</label> 
+                            <input name="map1_q5" class="map_radio" type="radio" id="map1_q5_b3" value="3"><label for="map1_q5_b3">  3</label>
+                            <input name="map1_q5" class="map_radio" type="radio" id="map1_q5_b4" value="4"><label for="map1_q5_b4">  4</label> 
+                            <input name="map1_q5" class="map_radio" type="radio" id="map1_q5_b5" value="5"><label for="map1_q5_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map1_q6" class="map1 padding10">
+                        <b>Q6. 我覺得半透明的溫度顏色，讓我輕易辨識溫度高低分佈範圍與建築物的遠近關係。</b> 
+                        <div class="sus">                        
+                            <label for="map1_q6_b1">不同意  <input name="map1_q6" class="map_radio" type="radio" id="map1_q6_b1" value="1"> 1</label>
+                            <input name="map1_q6" class="map_radio" type="radio" id="map1_q6_b2" value="2"><label for="map1_q6_b2">  2</label> 
+                            <input name="map1_q6" class="map_radio" type="radio" id="map1_q6_b3" value="3"><label for="map1_q6_b3">  3</label>
+                            <input name="map1_q6" class="map_radio" type="radio" id="map1_q6_b4" value="4"><label for="map1_q6_b4">  4</label> 
+                            <input name="map1_q6" class="map_radio" type="radio" id="map1_q6_b5" value="5"><label for="map1_q6_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map1_q7" class="map1 padding10">
+                        <b>Q7. 我覺得半透明的溫度顏色，讓我能輕鬆解決任務。</b> 
+                        <div class="sus">                        
+                            <label for="map1_q7_b1">不同意  <input name="map1_q7" class="map_radio" type="radio" id="map1_q7_b1" value="1"> 1</label>
+                            <input name="map1_q7" class="map_radio" type="radio" id="map1_q7_b2" value="2"><label for="map1_q7_b2">  2</label> 
+                            <input name="map1_q7" class="map_radio" type="radio" id="map1_q7_b3" value="3"><label for="map1_q7_b3">  3</label>
+                            <input name="map1_q7" class="map_radio" type="radio" id="map1_q7_b4" value="4"><label for="map1_q7_b4">  4</label> 
+                            <input name="map1_q7" class="map_radio" type="radio" id="map1_q7_b5" value="5"><label for="map1_q7_b5">  5   同意</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="task_map2" class="task_map" style="display: none;">   
+                    <h6>地圖二</h6>
+                    <div id="map2_q1" class=" padding10">
+                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <div>
+                            <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b1" value="1"><label for="map2_q1_b1">  建築Ａ</label>
+                            <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b2" value="2"><label for="map2_q1_b2">  建築B</label> 
+                            <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b3" value="3"><label for="map2_q1_b3">  建築C</label>
+                            <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b4" value="4"><label for="map2_q1_b4">  不知道</label> 
+                        </div>
+                    </div>
+                    <div id="map2_q2" class="map2 padding10">
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <div>                        
+                            <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b1" value="1"><label for="map2_q2_b1">  建築Ａ</label>
+                            <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b2" value="2"><label for="map2_q2_b2">  建築B</label> 
+                            <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b3" value="3"><label for="map2_q2_b3">  建築C</label>
+                            <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b4" value="4"><label for="map2_q2_b4">  不知道</label> 
+                        </div>
+                    </div>
+                    <div id="map2_q3" class="map2 padding10">
+                        <b>Q3. 在呈現所量測多處聚集高溫度的熱團中，離建築最遠的熱團，是位在哪一棟建築前方？ </b> 
+                        <div>
+                            <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b1" value="1"><label for="map2_q3_b1">  建築Ａ</label>
+                            <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b2" value="2"><label for="map2_q3_b2">  建築B</label> 
+                            <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b3" value="3"><label for="map2_q3_b3">  建築C</label>
+                            <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b4" value="4"><label for="map2_q3_b4">  不知道</label> 
+                        </div>
+                    </div>
+
+                    <div id="map2_q4" class="map2 padding10">
+                        <b>Q4. 我覺得不透明的溫度顏色，讓我輕易分辨溫度高低的分佈範圍。</b> 
+                        <div class="sus">                        
+                            <label for="map2_q4_b1">不同意  <input name="map2_q4" class="map_radio" type="radio" id="map2_q4_b1" value="1"> 1</label>
+                            <input name="map2_q4" class="map_radio" type="radio" id="map2_q4_b2" value="2"><label for="map2_q4_b2">  2</label> 
+                            <input name="map2_q4" class="map_radio" type="radio" id="map2_q4_b3" value="3"><label for="map2_q4_b3">  3</label>
+                            <input name="map2_q4" class="map_radio" type="radio" id="map2_q4_b4" value="4"><label for="map2_q4_b4">  4</label> 
+                            <input name="map2_q4" class="map_radio" type="radio" id="map2_q4_b5" value="5"><label for="map2_q4_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map2_q5" class="map2 padding10">
+                        <b>Q5. 我覺得不透明的溫度顏色，讓我輕易辨識背後建築的高低。</b> 
+                        <div class="sus">                        
+                            <label for="map2_q5_b1">不同意  <input name="map2_q5" class="map_radio" type="radio" id="map2_q5_b1" value="1"> 1</label>
+                            <input name="map2_q5" class="map_radio" type="radio" id="map2_q5_b2" value="2"><label for="map2_q5_b2">  2</label>
+                            <input name="map2_q5" class="map_radio" type="radio" id="map2_q5_b3" value="3"><label for="map2_q5_b3">  3</label>
+                            <input name="map2_q5" class="map_radio" type="radio" id="map2_q5_b4" value="4"><label for="map2_q5_b4">  4</label>
+                            <input name="map2_q5" class="map_radio" type="radio" id="map2_q5_b5" value="5"><label for="map2_q5_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map2_q6" class="map2 padding10">
+                        <b>Q6. 我覺得不透明的溫度顏色，讓我輕易辨識溫度高低分佈範圍與建築物的遠近關係。</b> 
+                        <div class="sus">                        
+                            <label for="map2_q6_b1">不同意  <input name="map2_q6" class="map_radio" type="radio" id="map2_q6_b1" value="1"> 1</label>
+                            <input name="map2_q6" class="map_radio" type="radio" id="map2_q6_b2" value="2"><label for="map2_q6_b2">  2</label> 
+                            <input name="map2_q6" class="map_radio" type="radio" id="map2_q6_b3" value="3"><label for="map2_q6_b3">  3</label>
+                            <input name="map2_q6" class="map_radio" type="radio" id="map2_q6_b4" value="4"><label for="map2_q6_b4">  4</label> 
+                            <input name="map2_q6" class="map_radio" type="radio" id="map2_q6_b5" value="5"><label for="map2_q6_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map2_q7" class="map2 padding10">
+                        <b>Q7. 我覺得不透明的溫度顏色，讓我能輕鬆解決任務。</b> 
+                        <div class="sus">                        
+                            <label for="map2_q7_b1">不同意  <input name="map2_q7" class="map_radio" type="radio" id="map2_q7_b1" value="1"> 1</label>
+                            <input name="map2_q7" class="map_radio" type="radio" id="map2_q7_b2" value="2"><label for="map2_q7_b2">  2</label> 
+                            <input name="map2_q7" class="map_radio" type="radio" id="map2_q7_b3" value="3"><label for="map2_q7_b3">  3</label>
+                            <input name="map2_q7" class="map_radio" type="radio" id="map2_q7_b4" value="4"><label for="map2_q7_b4">  4</label> 
+                            <input name="map2_q7" class="map_radio" type="radio" id="map2_q7_b5" value="5"><label for="map2_q7_b5">  5   同意</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="task_map3" class="task_map" style="display: none;">   
+                    <h6>地圖三</h6>
+                    <div id="map3_q1" class=" padding10">
+                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <div>
+                            <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b1" value="1"><label for="map3_q1_b1">  建築Ａ</label>
+                            <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b2" value="2"><label for="map3_q1_b2">  建築B</label> 
+                            <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b3" value="3"><label for="map3_q1_b3">  建築C</label>
+                            <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b4" value="4"><label for="map3_q1_b4">  不知道</label> 
+                        </div>
+                    </div>
+                    <div id="map3_q2" class="map3 padding10">
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <div>                        
+                            <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b1" value="1"><label for="map3_q2_b1">  建築Ａ</label>
+                            <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b2" value="2"><label for="map3_q2_b2">  建築B</label>
+                            <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b3" value="3"><label for="map3_q2_b3">  建築C</label>
+                            <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b4" value="4"><label for="map3_q2_b4">  不知道</label>
+                        </div>
+                    </div>
+                    <div id="map3_q3" class="map3 padding10">
+                        <b>Q3. 在呈現所量測多處聚集高溫度的熱團中，離建築最遠的熱團，是位在哪一棟建築前方？ </b> 
+                        <div>
+                            <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b1" value="1"><label for="map3_q3_b1">  建築Ａ</label>
+                            <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b2" value="2"><label for="map3_q3_b2">  建築B</label> 
+                            <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b3" value="3"><label for="map3_q3_b3">  建築C</label>
+                            <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b4" value="4"><label for="map3_q3_b4">  不知道</label>
+                        </div>
+                    </div>
+
+                    <div id="map3_q4" class="map3 padding10">
+                        <b>Q4. 我覺得半透明的溫度顏色，透過溫度篩選功能，讓我輕易分辨溫度高低的分佈範圍。</b> 
+                        <div class="sus">                        
+                            <label for="map3_q4_b1">不同意  <input name="map3_q4" class="map_radio" type="radio" id="map3_q4_b1" value="1"> 1</label>
+                            <input name="map3_q4" class="map_radio" type="radio" id="map3_q4_b2" value="2"><label for="map3_q4_b2">  2</label> 
+                            <input name="map3_q4" class="map_radio" type="radio" id="map3_q4_b3" value="3"><label for="map3_q4_b3">  3</label>
+                            <input name="map3_q4" class="map_radio" type="radio" id="map3_q4_b4" value="4"><label for="map3_q4_b4">  4</label> 
+                            <input name="map3_q4" class="map_radio" type="radio" id="map3_q4_b5" value="5"><label for="map3_q4_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map3_q5" class="map3 padding10">
+                        <b>Q5. 我覺得半透明的溫度顏色，透過溫度篩選功能，讓我輕易辨識背後建築的高低。</b> 
+                        <div class="sus">                        
+                            <label for="map3_q5_b1">不同意  <input name="map3_q5" class="map_radio" type="radio" id="map3_q5_b1" value="1"> 1</label>
+                            <input name="map3_q5" class="map_radio" type="radio" id="map3_q5_b2" value="2"><label for="map3_q5_b2">  2</label> 
+                            <input name="map3_q5" class="map_radio" type="radio" id="map3_q5_b3" value="3"><label for="map3_q5_b3">  3</label>
+                            <input name="map3_q5" class="map_radio" type="radio" id="map3_q5_b4" value="4"><label for="map3_q5_b4">  4</label> 
+                            <input name="map3_q5" class="map_radio" type="radio" id="map3_q5_b5" value="5"><label for="map3_q5_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map3_q6" class="map3 padding10">
+                        <b>Q6. 我覺得半透明的溫度顏色，透過溫度篩選功能，讓我輕易辨識溫度高低分佈範圍與建築物的遠近關係。</b> 
+                        <div class="sus">                        
+                            <label for="map3_q6_b1">不同意  <input name="map3_q6" class="map_radio" type="radio" id="map3_q6_b1" value="1"> 1</label>
+                            <input name="map3_q6" class="map_radio" type="radio" id="map3_q6_b2" value="2"><label for="map3_q6_b2">  2</label> 
+                            <input name="map3_q6" class="map_radio" type="radio" id="map3_q6_b3" value="3"><label for="map3_q6_b3">  3</label>
+                            <input name="map3_q6" class="map_radio" type="radio" id="map3_q6_b4" value="4"><label for="map3_q6_b4">  4</label> 
+                            <input name="map3_q6" class="map_radio" type="radio" id="map3_q6_b5" value="5"><label for="map3_q6_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map3_q7" class="map3 padding10">
+                        <b>Q7. 我覺得半透明的溫度顏色，透過溫度篩選功能，讓我能輕鬆解決任務。</b> 
+                        <div class="sus">                        
+                            <label for="map3_q7_b1">不同意  <input name="map3_q7" class="map_radio" type="radio" id="map3_q7_b1" value="1"> 1</label>
+                            <input name="map3_q7" class="map_radio" type="radio" id="map3_q7_b2" value="2"><label for="map3_q7_b2">  2</label> 
+                            <input name="map3_q7" class="map_radio" type="radio" id="map3_q7_b3" value="3"><label for="map3_q7_b3">  3</label>
+                            <input name="map3_q7" class="map_radio" type="radio" id="map3_q7_b4" value="4"><label for="map3_q7_b4">  4</label> 
+                            <input name="map3_q7" class="map_radio" type="radio" id="map3_q7_b5" value="5"><label for="map3_q7_b5">  5   同意</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="task_map4" class="task_map" style="display: none;">   
+                    <h6>地圖四</h6>
+                    <div id="map4_q1" class=" padding10">
+                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <div>
+                            <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b1" value="1"><label for="map4_q1_b1">  建築Ａ</label>
+                            <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b2" value="2"><label for="map4_q1_b2">  建築B</label> 
+                            <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b3" value="3"><label for="map4_q1_b3">  建築C</label>
+                            <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b4" value="4"><label for="map4_q1_b4">  不知道</label> 
+                        </div>
+                    </div>
+                    <div id="map4_q2" class="map4 padding10">
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <div>                        
+                            <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b1" value="1"><label for="map4_q2_b1">  建築Ａ</label>
+                            <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b2" value="2"><label for="map4_q2_b2">  建築B</label> 
+                            <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b3" value="3"><label for="map4_q2_b3">  建築C</label>
+                            <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b4" value="4"><label for="map4_q2_b4">  不知道</label> 
+                        </div>
+                    </div>
+                    <div id="map4_q3" class="map4 padding10">
+                        <b>Q3. 在呈現所量測多處聚集高溫度的熱團中，離建築最遠的熱團，是位在哪一棟建築前方？ </b>
+                        <div> 
+                            <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b1" value="1"><label for="map4_q3_b1">  建築Ａ</label>
+                            <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b2" value="2"><label for="map4_q3_b2">  建築B</label> 
+                            <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b3" value="3"><label for="map4_q3_b3">  建築C</label>
+                            <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b4" value="4"><label for="map4_q3_b4">  不知道</label>
+                        </div>
+                    </div>
+
+                    <div id="map4_q4" class="map4 padding10">
+                        <b>Q4. 我覺得不透明的溫度顏色，透過溫度篩選功能，讓我輕易分辨溫度高低的分佈範圍。</b> 
+                        <div class="sus">                        
+                            <label for="map4_q4_b1">不同意  <input name="map4_q4" class="map_radio" type="radio" id="map4_q4_b1" value="1"> 1</label>
+                            <input name="map4_q4" class="map_radio" type="radio" id="map4_q4_b2" value="2"><label for="map4_q4_b2">  2</label> 
+                            <input name="map4_q4" class="map_radio" type="radio" id="map4_q4_b3" value="3"><label for="map4_q4_b3">  3</label>
+                            <input name="map4_q4" class="map_radio" type="radio" id="map4_q4_b4" value="4"><label for="map4_q4_b4">  4</label> 
+                            <input name="map4_q4" class="map_radio" type="radio" id="map4_q4_b5" value="5"><label for="map4_q4_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map4_q5" class="map4 padding10">
+                        <b>Q5. 我覺得不透明的溫度顏色，透過溫度篩選功能，讓我輕易辨識背後建築的高低。</b> 
+                        <div class="sus">                        
+                            <label for="map4_q5_b1">不同意  <input name="map4_q5" class="map_radio" type="radio" id="map4_q5_b1" value="1"> 1</label>
+                            <input name="map4_q5" class="map_radio" type="radio" id="map4_q5_b2" value="2"><label for="map4_q5_b2">  2</label> 
+                            <input name="map4_q5" class="map_radio" type="radio" id="map4_q5_b3" value="3"><label for="map4_q5_b3">  3</label>
+                            <input name="map4_q5" class="map_radio" type="radio" id="map4_q5_b4" value="4"><label for="map4_q5_b4">  4</label> 
+                            <input name="map4_q5" class="map_radio" type="radio" id="map4_q5_b5" value="5"><label for="map4_q5_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map4_q6" class="map4 padding10">
+                        <b>Q6. 我覺得不透明的溫度顏色，透過溫度篩選功能，讓我輕易辨識溫度高低分佈範圍與建築物的遠近關係。</b> 
+                        <div class="sus">                        
+                            <label for="map4_q6_b1">不同意  <input name="map4_q6" class="map_radio" type="radio" id="map4_q6_b1" value="1"> 1</label>
+                            <input name="map4_q6" class="map_radio" type="radio" id="map4_q6_b2" value="2"><label for="map4_q6_b2">  2</label> 
+                            <input name="map4_q6" class="map_radio" type="radio" id="map4_q6_b3" value="3"><label for="map4_q6_b3">  3</label>
+                            <input name="map4_q6" class="map_radio" type="radio" id="map4_q6_b4" value="4"><label for="map4_q6_b4">  4</label> 
+                            <input name="map4_q6" class="map_radio" type="radio" id="map4_q6_b5" value="5"><label for="map4_q6_b5">  5   同意</label>
+                        </div>
+                    </div>
+                    <div id="map4_q7" class="map4 padding10">
+                        <b>Q7. 我覺得不透明的溫度顏色，透過溫度篩選功能，讓我能輕鬆解決任務。</b> 
+                        <div class="sus">                        
+                            <label for="map4_q7_b1">不同意  <input name="map4_q7" class="map_radio" type="radio" id="map4_q7_b1" value="1"> 1</label>
+                            <input name="map4_q7" class="map_radio" type="radio" id="map4_q7_b2" value="2"><label for="map4_q7_b2">  2</label> 
+                            <input name="map4_q7" class="map_radio" type="radio" id="map4_q7_b3" value="3"><label for="map4_q7_b3">  3</label>
+                            <input name="map4_q7" class="map_radio" type="radio" id="map4_q7_b4" value="4"><label for="map4_q7_b4">  4</label> 
+                            <input name="map4_q7" class="map_radio" type="radio" id="map4_q7_b5" value="5"><label for="map4_q7_b5">  5   同意</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div>作答時間: <span class="counttime"></span></div>     -->
+            </div>
+            
+            <!-- slider使用量表 -->
+            <div id="slider_question_div" class="_divStyle" style="display: none;">
+                <p>透過使用溫度篩選功能介面後，回答以下使用問卷調查</p>
+                <div id="slider_q1" class="padding10">
+                    <b>Q1. 我覺得介面沒有操作說明，讓我不知道如何使用篩選溫度功能。</b> 
+                    <div class="sus">                        
+                        <label for="slider_q1_b1">不同意  <input name="slider_q1" class="" type="radio" id="slider_q1_b1" value="1"> 1</label>
+                        <input name="slider_q1" class="" type="radio" id="slider_q1_b2" value="2"><label for="slider_q1_b2">  2</label> 
+                        <input name="slider_q1" class="" type="radio" id="slider_q1_b3" value="3"><label for="slider_q1_b3">  3</label>
+                        <input name="slider_q1" class="" type="radio" id="slider_q1_b4" value="4"><label for="slider_q1_b4">  4</label> 
+                        <input name="slider_q1" class="" type="radio" id="slider_q1_b5" value="5"><label for="slider_q1_b5">  5   同意</label>
+                    </div>
+                </div>
+                <div id="slider_q2" class="padding10">
+                    <b>Q2. 我需要花很多時間學習才知道篩選溫度功能如何使用。</b> 
+                    <div class="sus">                        
+                        <label for="slider_q2_b1">不同意  <input name="slider_q2" class="" type="radio" id="slider_q2_b1" value="1"> 1</label>
+                        <input name="slider_q2" class="" type="radio" id="slider_q2_b2" value="2"><label for="slider_q2_b2">  2</label> 
+                        <input name="slider_q2" class="" type="radio" id="slider_q2_b3" value="3"><label for="slider_q2_b3">  3</label>
+                        <input name="slider_q2" class="" type="radio" id="slider_q2_b4" value="4"><label for="slider_q2_b4">  4</label> 
+                        <input name="slider_q2" class="" type="radio" id="slider_q2_b5" value="5"><label for="slider_q2_b5">  5   同意</label>
+                    </div>
+                </div>
+                <div id="slider_q3" class="padding10">
+                    <b>Q3. 我一看到這個介面，就知道如何使用篩選溫度功能。</b> 
+                    <div class="sus">                        
+                        <label for="slider_q3_b1">不同意  <input name="slider_q3" class="" type="radio" id="slider_q3_b1" value="1"> 1</label>
+                        <input name="slider_q3" class="" type="radio" id="slider_q3_b2" value="2"><label for="slider_q3_b2">  2</label> 
+                        <input name="slider_q3" class="" type="radio" id="slider_q3_b3" value="3"><label for="slider_q3_b3">  3</label>
+                        <input name="slider_q3" class="" type="radio" id="slider_q3_b4" value="4"><label for="slider_q3_b4">  4</label> 
+                        <input name="slider_q3" class="" type="radio" id="slider_q3_b5" value="5"><label for="slider_q3_b5">  5   同意</label>
+                    </div>
+                </div>
+                <div id="slider_q4" class="padding10">
+                    <b>Q4. 我覺得篩選溫度功能很好操作使用，我會願意使用。</b> 
+                    <div class="sus">                        
+                        <label for="slider_q4_b1">不同意  <input name="slider_q4" class="" type="radio" id="slider_q4_b1" value="1"> 1</label>
+                        <input name="slider_q4" class="" type="radio" id="slider_q4_b2" value="2"><label for="slider_q4_b2">  2</label> 
+                        <input name="slider_q4" class="" type="radio" id="slider_q4_b3" value="3"><label for="slider_q4_b3">  3</label>
+                        <input name="slider_q4" class="" type="radio" id="slider_q4_b4" value="4"><label for="slider_q4_b4">  4</label> 
+                        <input name="slider_q4" class="" type="radio" id="slider_q4_b5" value="5"><label for="slider_q4_b5">  5   同意</label>
+                    </div>
+                </div>
+                <div id="slider_q5" class="padding10">
+                    <b>Q5. 我覺得篩選溫度功能很實用。</b> 
+                    <div class="sus">                        
+                        <label for="slider_q5_b1">不同意  <input name="slider_q5" class="" type="radio" id="slider_q5_b1" value="1"> 1</label>
+                        <input name="slider_q5" class="" type="radio" id="slider_q5_b2" value="2"><label for="slider_q5_b2">  2</label> 
+                        <input name="slider_q5" class="" type="radio" id="slider_q5_b3" value="3"><label for="slider_q5_b3">  3</label>
+                        <input name="slider_q5" class="" type="radio" id="slider_q5_b4" value="4"><label for="slider_q5_b4">  4</label> 
+                        <input name="slider_q5" class="" type="radio" id="slider_q5_b5" value="5"><label for="slider_q5_b5">  5   同意</label>
+                    </div>
+                </div>
+                <div id="slider_q5" class="padding10">
+                    <b>Q6. 其他建議。</b>
+                    <textarea name="other_opinions" class="form-control" rows="3" style="resize: none;"></textarea>
+                </div>
+                <input id="finish_btn" data-task="" class="btn btn-primary center" type="button" name="" value="送出問卷">
+            </div>
+        </div>
+
+        <div class="stopwatch displaynone"><!-- append --></div> <!-- hide count -->
+    </div>
+    <!-- step4結束 -->
+    <div id="step_4_div" style="display: none; margin: auto;">
+        <h2>實驗結束，感謝您的協助，祝您有個美好的一天 :)</h2>
+    </div>
+
+</body>
+
+<!-- 時間已經結束，準備進行下一個測驗 modal -->
+<div class="modal fade" id="time_out_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="time_out_modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <div class="modal-title over_title_show">
+                    <h4 class="modal-title">
+                        時間已經結束，準備進行下一個測驗
+                    </h4>
+                </div>
+            </div>
+<!--             <div class="modal-body">
+                時間已經結束，準備進行下一個測驗
+            </div> -->
+            <div class="modal-footer" style="text-align:center">
+                <button id="next_task_btn" data-task="" type="button" class="btn btn-primary center" data-dismiss="modal">進行下一個測驗</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 溫度篩選說明 modal -->
+<div class="modal fade" id="temperature_slider_scription_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="time_out_modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <div class="modal-title over_title_show">
+                    <h4 class="modal-title">
+                        溫度篩選功能說明
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="center">接下來，在地圖三與地圖四的右下角會出現溫度篩選功能。</p>
+                <b class="center">您可以選擇使用溫度篩選功能來協助您任務作答。</b>
+                <div class="center"><img  style="width: 400px" src="images/temperature_slider_filter.jpg"></div>
+            </div>
+            <p class="center">準備好了嗎?按下開始實驗。</p>
+            <div class="modal-footer" style="text-align:center">
+                
+                <button id="start_map3_task_btn" type="button" class="btn btn-primary center" data-dismiss="modal">開始實驗</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/test_speed.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+<script type="text/javascript">
+    var user_response = {};
+        user_response.user_info = {},           //基本資料
+        user_response.user_cognitive_test = {}, //視覺認知
+        user_response.user_alpha_task = {};   //透明度任務
+
+
+    //顯示倒數時間
+    var countime;
+    function startTimer(duration) {
+        var timer = duration, minutes, seconds;
+        countime = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            //顯示div
+             $('.counttime').text( minutes + ":" + seconds )
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+
+            if(minutes == "00" && seconds == "00"){
+                clearInterval(countime);
+                $('#time_out_modal').modal('show'); //時間到
+            }
+        }, 1000);
+    }
+
+    //同意實驗
+    $('#agree_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        var myDate = new Date(),
+            mytime = myDate.toLocaleTimeString(),  //獲取當前時間
+            start_time = myDate.toLocaleString();  //獲取日期與時間
+        $('body').append(function(){
+            return '<input type="hidden" name="start_time" value="'+ start_time +'">';
+        })
+
+        $('#agree_div').hide();
+        $('#step_1_div').show();
+    })
+
+    // 開始進行實驗btn 開始CF說明
+    $('#start_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        if($('form input:checked').length < 6){
+            alert("請確任基本資料都已填選");
+        } else {
+            $('#step_1_div').hide();
+            $('#step_2_div').show();
+            
+            // 紀錄基本資料
+            user_response.user_info = {
+                name: $('input[name="name"]').val(),
+                phone: $('input[name="phone"]').val(),
+                email: $('input[name="email"]').val(),
+                sex: $('input[name="sex"]:checked').val(),
+                age: $('input[name="age"]:checked').val(),
+                edu: $('input[name="edu"]:checked').val(),
+                skill: $('input[name="skill"]:checked').val(),
+                skill_other: $('input[name="skill_other"]').val(),
+                use: $('input[name="use"]:checked').val(),
+                device: $('input[name="device"]:checked').val()
+            }
+        }
+    });
+
+    // 任務提示
+    $('[data-toggle="tooltip"]').tooltip()
+
+    //開始CF任務＆計時
+    $('#start_cf_task_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        $('#cf_descript_div').hide();
+        $('#cf_task_div').show();
+        $('#next_task_btn').data('task', 'p');
+        $('.counttime').text( "03:00")
+        startTimer(3 * 60);//倒數3分計時 (min.taskname)
+        stopwatch.start(); //計時開始
+
+        //產題
+        $('#cf_items').append(function(){
+            var html="";
+            for(var i=1; i<=16; i++){
+                html += '<div class="center">\
+                            <label>' + i + '</label>\
+                            <img src="images/cf' + i + '.jpg">\
+                            <div class="custom-radio custom-control-inline">\
+                                <input name="cf' + i + '" type="radio" id="cf' + i + '_a" class="custom-check-input" value="A">\
+                                <label for="cf' + i + '_a" class="custom-check-label">A</label>\
+                            </div>\
+                            <div class="custom-radio custom-control-inline">\
+                                <input name="cf' + i + '" type="radio" id="cf' + i + '_b" class="custom-check-input" value="B">\
+                                <label for="cf' + i + '_b" class="custom-check-label">B</label>\
+                            </div>\
+                            <div class="custom-radio custom-control-inline">\
+                                <input name="cf' + i + '" type="radio" id="cf' + i + '_c" class="custom-check-input" value="C">\
+                                <label for="cf' + i + '_c" class="custom-check-label">C</label>\
+                            </div>\
+                            <div class="custom-radio custom-control-inline">\
+                                <input name="cf' + i + '" type="radio" id="cf' + i + '_d" class="custom-check-input" value="D">\
+                                <label for="cf' + i + '_d" class="custom-check-label">D</label>\
+                            </div>\
+                            <div class="custom-radio custom-control-inline">\
+                                <input name="cf' + i + '" type="radio" id="cf' + i + '_e" class="custom-check-input" value="E">\
+                                <label for="cf' + i + '_e" class="custom-check-label">E</label>\
+                            </div>\
+                        </div>';
+            }
+            return html;
+        });
+    })
+
+    // 進行下一測驗
+    $('#next_task_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        clearInterval(countime); //清倒數
+        if ( $(this).data('task') == "p"){
+            start_p();//開始Ｐ說明
+        } else if($(this).data('task') == "s"){
+            start_s();//開始S說明
+        } else if($(this).data('task') == "alpha"){
+            start_alpha();//開始Alpha說明
+        };
+    })
+
+    //開始Ｐ說明 紀錄CF
+    function start_p(){
+        stopwatch.stop(); // 停止ＣＦ計時
+        var user_cognitive_test = user_response.user_cognitive_test;
+        user_cognitive_test.cf_time = ($('.stopwatch').text())//作答時間累計
+        // 紀錄ＣＦ分數
+        user_cognitive_test.cf = [];
+        for (var i=1 ; i <= 16 ; i++){
+            user_cognitive_test.cf.push($('input[name="cf'+ i +'"]:checked').val() || null)
+        }
+        console.log(user_cognitive_test.cf)
+        console.log(user_cognitive_test)
+
+        $('#cf_div').hide();
+        $('#p_div, #p_descript_div').show();
+    }
+
+    //開始Ｐ說明
+    $('#start_p_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        clearInterval(countime); //清倒數 
+        start_p();//開始Ｐ 顯示計時
+    })
+
+    //開始Ｐ任務＆計時
+    $('#start_p_task_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        $('#p_descript_div').hide();
+        $('#p_task_div').show();
+        $('#next_task_btn').data('task', 's'); //下一任務
+
+        stopwatch.restart(); //計時歸零
+        stopwatch.start(); //計時開始
+        $('.counttime').text( "01:30")
+        startTimer(1.5 * 60);//倒數1.5分計時 (min.taskname)
+
+        // 產題
+        $('#p_items').append(function(){
+            var html="";
+            for(var i=1; i<=48; i++){
+                html += '<div class="col-md-6 p_group">\
+                            <label>' + i + '.</label>\
+                            <div class="pic_w"><img class="w100p" id="p1_img" src="images/p' + i + '.jpg"></div>\
+                            <div class="p_radio">\
+                                <div class="custom-radio custom-control-inline">\
+                                    <input name="p' + i + '" type="radio" id="p' + i + '_1" class="custom-check-input" value="1">\
+                                    <label for="p' + i + '_1" class="custom-check-label">A</label>\
+                                </div>\
+                                <div class="custom-radio custom-control-inline">\
+                                    <input name="p' + i + '" type="radio" id="p' + i + '_2" class="custom-check-input" value="2">\
+                                    <label for="p' + i + '_2" class="custom-check-label">B</label>\
+                                </div>\
+                                <div class="custom-radio custom-control-inline">\
+                                    <input name="p' + i + '" type="radio" id="p' + i + '_3" class="custom-check-input" value="3">\
+                                    <label for="p' + i + '_3" class="custom-check-label">C</label>\
+                                </div>\
+                                <div class="custom-radio custom-control-inline">\
+                                    <input name="p' + i + '" type="radio" id="p' + i + '_4" class="custom-check-input" value="4">\
+                                    <label for="p' + i + '_4" class="custom-check-label">D</label>\
+                                </div>\
+                                <div class="custom-radio custom-control-inline">\
+                                    <input name="p' + i + '" type="radio" id="p' + i + '_5" class="custom-check-input" value="5">\
+                                    <label for="p' + i + '_5" class="custom-check-label">E</label>\
+                                </div>\
+                            </div>\
+                        </div>';
+            }
+            return html;
+        });
+    })
+
+    //開始S說明
+    $('#start_s_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        clearInterval(countime); //清倒數 
+        start_s();//開始S 顯示計時
+    })
+
+    //開始S說明 紀錄P分數
+    function start_s(){
+        stopwatch.stop(); // 停止P計時
+        var user_cognitive_test = user_response.user_cognitive_test;
+        user_cognitive_test.p_time = ($('.stopwatch').text())//作答時間累計
+
+        // 紀錄P分數
+        user_cognitive_test.p = [];
+        for (var i=1 ; i <= 48 ; i++){
+            user_cognitive_test.p.push($('input[name="p'+ i +'"]:checked').val() || null)
+        }
+        console.log(user_cognitive_test.p)
+        console.log(user_cognitive_test)
+
+        $('#p_div').hide();
+        $('#s_div, #s_descript_div').show();
+    }
+    //開始S任務＆計時
+    $('#start_s_task_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        $('#s_descript_div').hide();
+        $('#s_task_div').show();
+        $('#next_task_btn').data('task', 'alpha'); //下一任務
+
+        stopwatch.restart(); //計時歸零
+        stopwatch.start(); //計時開始
+        $('.counttime').text( "03:00")
+        startTimer(3 * 60);//倒數3分計時 (min.taskname)
+        // 產題
+        $('#s_items').append(function(){
+            var html="";
+            for(var i=1; i<=10; i++){
+                html += '<div class="s_group">\
+                            <label>' + i + '.</label>\
+                            <img class="w100p" id="s' + i + '_img" src="images/s' + i + '.jpg">\
+                            <div class="radio_group">';
+                for(var j=1; j<=8; j++){
+                    html += '   <div class="radio_padding">\
+                                    <div class="custom-radio custom-control-inline">\
+                                        <input name="s' + i + '-' + j + '" type="radio" id="s' + i + '-' + j + '_s" class="custom-check-input" value="S">\
+                                        <label for="s' + i + '-' + j + '_s" class="custom-check-label">S</label>\
+                                    </div>\
+                                    <div class="custom-radio custom-control-inline">\
+                                        <input name="s' + i + '-' + j + '" type="radio" id="s' + i + '-' + j + '_d" class="custom-check-input" value="D">\
+                                        <label for="s' + i + '-' + j + '_d" class="custom-check-label">D</label>\
+                                    </div>\
+                                </div>';
+                }
+                html += '   </div>\
+                        </div>';
+            }
+            return html;
+        });
+    })
+
+    //開始alpha說明
+    $('#start_alpha_btn').click(function(){
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        clearInterval(countime); //清倒數 
+        start_alpha();//開始alpha 顯示計時
+    })
+    //開始alpha說明 紀錄S分數
+    function start_alpha(){
+        stopwatch.stop(); // 停止S計時
+        var user_cognitive_test = user_response.user_cognitive_test;
+        user_cognitive_test.s_time = ($('.stopwatch').text())//作答時間累計
+
+        // 紀錄S分數
+        var s = ["s1","s2","s3","s4","s5","s6","s7","s8","s9","s10"]
+        for (var i in s){        
+            user_cognitive_test[s[i]] = [];
+            var s_num = Number(i)+1; 
+            for (var j=1 ; j <= 8 ; j++){
+                user_cognitive_test[s[i]].push($('input[name="s'+ s_num +"-"+ j +'"]:checked').val() || null)
+            }
+        }
+        console.log(user_cognitive_test)
+        check_cognitive_ans(); //對認知答案
+
+        $('#step_2_div, #s_div').hide();
+        $('#step_3_div, #alpha_div, #alpha_descript_div').show();
+    }
+
+    //開始Alpha任務＆計時
+    $('#start_alpha_task_btn').click(function(){
+        task_map_load(1);//產地圖一
+        $('html,body').animate({ scrollTop: 0 });//滾軸top0
+        $('#alpha_descript_div').hide();
+        $('#alpha_task_div').show();
+        $('#next_task_btn').data('task', 'alpha2'); //下一任務
+
+        stopwatch.restart(); //計時歸零
+        stopwatch.start(); //計時開始
+        // $('.counttime').text( "03:00")
+        // startTimer(3 * 60);//倒數3分計時 (min.taskname)
+        // 產題
+        $('#map1_q1').show();
+    })
+
+    //開始Alpha map2_q1-7任務＆計時
+    $('.map_radio').click(function(){
+        var this_name = $(this).attr('name');
+        var item = this_name.substring(0,7),
+            next_item = this_name.substring(0,6);
+        var q_num = Number(this_name.substr(-1,1)),
+            next_q_num = q_num+1;
+        var map_num = Number(this_name.substr(3,1)),
+            next_map_num = map_num+1;
+        // console.log(item)
+        // console.log(next_q_num)
+        // console.log(map_num)
+        // console.log(next_map_num)
+        // console.log(next_item)
+        stopwatch.stop(); // 停止計時
+        var user_alpha_task = user_response.user_alpha_task;
+        user_alpha_task[item] = $('input[name="'+item+'"]:checked').val() || null; //紀錄map_q1.q2.q3
+        user_alpha_task[item+"_time"] = ($('.stopwatch').text())//作答時間累計
+        
+        if (q_num < 7){ //q7結束進下一map_q1
+            $('#'+item).hide();
+            $('#'+next_item+next_q_num).show();
+            stopwatch.restart(); //計時歸零
+            stopwatch.start(); //計時開始
+        } else {
+            if (next_map_num == 3){ //map3開始溫度篩選
+                $('#task_map'+map_num).hide();
+                $('#temperature_slider_scription_modal').modal('show');//溫度篩選說明
+                $('#task_map'+next_map_num).show();
+                task_map_load(next_map_num);//產地圖3.4
+            } else {
+                $('#task_map'+map_num).hide();
+                $('#task_map'+next_map_num).show();
+                task_map_load(next_map_num);//產地圖2.4
+                stopwatch.restart(); //計時歸零
+                stopwatch.start(); //計時開始
+            }
+        }
+
+        if (item == "map4_q7" && next_q_num == 8){
+            stopwatch.stop(); // 停止計時
+            check_alpha_ans(); //比對透明度q1.q2.q3答案
+            $('#alpha_task_div').hide();
+            $('#slider_question_div').show(); //slider使用量表
+            // console.log(user_alpha_task)
+            // console.log(user_response)
+        }
+    })
+    
+    // 溫度篩選說明modal 開始地圖三
+    $('#start_map3_task_btn').click(function(){
+        stopwatch.restart(); //計時歸零
+        stopwatch.start(); //計時開始
+    })
+    
+    // 比對視覺認知測驗答案
+    function check_cognitive_ans(){
+        var user_cognitive_test = user_response.user_cognitive_test;
+        // 認知答案
+        var cognitive_ans = { 
+            cf:["A", "B", "A", "E", "B", "C", "D", "B", "E", "D", "A", "C", "D", "E", "C", "E"],
+            p:['3', '5', '2', '1', '4', '3', '4', '5', '4', '5', '1', '4', '4', '4', '5', '3', '4', '3', '2', '1', '4', '4', '1', '1', '5', '4', '4', '4', '4', '4', '2', '2', '4', '4', '3', '3', '4', '3', '1', '4', '3', '1', '2', '4', '1', '3', '4', '5'],
+            s1:["D", "S", "S", "D", "D", "S", "D", "S"],
+            s2:["S", "S", "S", "D", "S", "S", "S", "S"],
+            s3:["S", "D", "D", "D", "S", "S", "S", "D"],
+            s4:["S", "S", "D", "S", "D", "D", "D", "S"],
+            s5:["D", "S", "D", "D", "S", "S", "D", "S"],
+            s6:["S", "D", "S", "S", "S", "S", "D", "D"],
+            s7:["S", "D", "S", "D", "D", "S", "S", "S"],
+            s8:["D", "D", "S", "S", "D", "S", "D", "D"],
+            s9:["D", "D", "S", "S", "D", "S", "S", "D"],
+            s10:["S", "D", "D", "S", "D", "D", "S", "S"]    
+        }
+        // 使用者答案
+        console.log(user_cognitive_test)
+
+        var task_item = ["cf","p","s1","s2","s3","s4","s5","s6","s7","s8","s9","s10"];
+        var match_cf_arr = [];
+        var match_p_arr = [];
+        var match_s_arr = [];
+        for(var i in task_item){    
+            for(var j in cognitive_ans[task_item[i]]){
+                if(cognitive_ans[task_item[i]][j].indexOf(user_cognitive_test[task_item[i]][j]) >= 0){
+                    switch(task_item[i]){
+                        case "cf":
+                            match_cf_arr.push(j);
+                            break;
+                        case "p":
+                            match_p_arr.push(j);
+                            break;
+                        case "s1":
+                        case "s2":
+                        case "s3":
+                        case "s4":
+                        case "s5":
+                        case "s6":
+                        case "s7":
+                        case "s8":
+                        case "s9":
+                        case "s10":
+                            match_s_arr.push(j);
+                            break;
+                    }
+                }
+            }
+        }
+
+        //答對題數累計
+        user_cognitive_test.cf_match = match_cf_arr;
+        user_cognitive_test.cf_match_length = match_cf_arr.length;
+        user_cognitive_test.p_match = match_p_arr;
+        user_cognitive_test.p_match_length = match_p_arr.length;
+        user_cognitive_test.s_match = match_s_arr;
+        user_cognitive_test.s_match_length = match_s_arr.length;
+        console.log(user_cognitive_test)
+        // var match_arr = [];
+        // var task_item = ["cf","p","s1","s2","s3","s4","s5","s6","s7","s8"];
+        // for(var i in cognitive_ans.p){
+        //     if(cognitive_ans.p[i].indexOf(user_cognitive_test.p[i]) >= 0){
+        //         match_arr.push(cognitive_ans.p[i])
+        //     }   
+        // }
+        // console.log(match_arr)
+
+
+        // var task_item = ["cf","p","s1","s2","s3","s4","s5","s6","s7","s8"];
+        // var match_arr = [];
+        // for(var i in task_item){    
+        //     for(var j in cognitive_ans[task_item[i]]){
+        //         if(cognitive_ans[task_item[i]][j].indexOf(user_cognitive_test[task_item[i]][j]) >= 0){
+        //             match_arr.push(cognitive_ans[task_item[i]][j])
+        //         }
+        //     }
+        // }
+        // console.log(match_arr)
+    }
+
+    // 比對透明度任務答案
+    function check_alpha_ans(){
+        var user_alpha_task = user_response.user_alpha_task;
+        // 認知答案
+        var alpha_ans = {
+            map1_q1:["3"],
+            map1_q2:["3"],
+            map1_q3:["1"],
+            map2_q1:["3"],
+            map2_q2:["3"],
+            map2_q3:["1"],
+            map3_q1:["3"],
+            map3_q2:["2"],
+            map3_q3:["3"],
+            map4_q1:["2"],
+            map4_q2:["1"],
+            map4_q3:["3"]
+        }
+        var task_item = ["map1_q1","map1_q2","map1_q3","map2_q1","map2_q2","map2_q3","map3_q1","map3_q2","map3_q3","map4_q1","map4_q2","map4_q3"];
+        // 答對:0 答錯:-1
+        for(var i in task_item){    
+            for(var j in alpha_ans[task_item[i]]){
+                switch(task_item[i]){
+                    case "map1_q1":
+                        user_alpha_task.map1_q1_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map1_q2":
+                        user_alpha_task.map1_q2_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map1_q3":
+                        user_alpha_task.map1_q3_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map2_q1":
+                        user_alpha_task.map2_q1_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map2_q2":
+                        user_alpha_task.map2_q2_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map2_q3":
+                        user_alpha_task.map2_q3_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map3_q1":
+                        user_alpha_task.map3_q1_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map3_q2":
+                        user_alpha_task.map3_q2_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map3_q3":
+                        user_alpha_task.map3_q3_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map4_q1":
+                        user_alpha_task.map4_q1_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map4_q2":
+                        user_alpha_task.map4_q2_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                    case "map4_q3":
+                        user_alpha_task.map4_q3_match = alpha_ans[task_item[i]][j].indexOf(user_alpha_task[task_item[i]][j]);
+                        break;
+                }
+            }
+        }
+    }
+
+
+
+    // node to firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAjEP88B-knOSphF4FZm_V4WmopD-_iQdE",
+      authDomain: "thesis-test2020.firebaseapp.com",
+      databaseURL: "https://thesis-test2020.firebaseio.com",
+      projectId: "thesis-test2020",
+      storageBucket: "thesis-test2020.appspot.com",
+      messagingSenderId: "564784876739",
+      appId: "1:564784876739:web:1c12337b68f8d5d6f1a676",
+      measurementId: "G-X1C8MT4P04"
+    };
+
+    // **Error: PERMISSION_DENIED: Permission denied irebase sholud set on firebase-規則 below,
+    // {
+    //   "rules": {
+    //     ".read": true,
+    //     ".write": true
+    //   }
+    // }
+
+    firebase.initializeApp(firebaseConfig);
+    var questionnaire = firebase.database().ref('questionnaire');
+
+    //  送出結果 to firebase // 紀錄slider問卷
+    $('#slider_question_div').on('click', '#finish_btn', function(){
+        // 紀錄slider問卷
+        user_response.user_alpha_task.slider_q1 = $('input[name="slider_q1"]:checked').val() || null;
+        user_response.user_alpha_task.slider_q2 = $('input[name="slider_q2"]:checked').val() || null;
+        user_response.user_alpha_task.slider_q3 = $('input[name="slider_q3"]:checked').val() || null;
+        user_response.user_alpha_task.slider_q4 = $('input[name="slider_q4"]:checked').val() || null;
+        user_response.user_alpha_task.slider_q5 = $('input[name="slider_q5"]:checked').val() || null;
+        user_response.user_alpha_task.other_opinions = $('textarea[name="other_opinions"]').val();
+
+        var myDate = new Date(),
+            mytime = myDate.toLocaleTimeString(),     //獲取當前時間
+            end_time = myDate.toLocaleString();     //獲取當前日期與時間
+        var mem_id = myDate.getTime();  //獲取當前時間(從1970.1.1開始的毫秒數)
+        $('body').append(function(){
+            return '<input type="hidden" name="end_time" value="'+ end_time +'">\
+                    <input type="hidden" name="mem_id" value="'+ mem_id +'">';
+        })
+
+        user_response.mem_id = $('input[name="mem_id"]').val();
+        user_response.start_time = $('input[name="start_time"]').val();
+        user_response.end_time = $('input[name="end_time"]').val();
+
+        console.log(user_response)
+        // 推推
+        questionnaire.push(user_response);
+        $('#step_3_div').hide();
+        $('#step_4_div').show();
+    });
+</script>
+
+<!-- map task -->
+<script type="text/javascript">
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYmlhYm9ibyIsImEiOiJjamVvejdlNXQxZnBuMndtdWhiZHRuaTNpIn0.PIS9wtUxm_rz_IzF2WFD1g';
+
+    var chart = echarts.init(document.getElementById('map'));
+    // var sTemperatureDatas;
+
+    function loadBase(sTemperatureDatas, map_div, currentCoord, LngLat_arr, alpha, continuous_show) {
+        // param
+        var container = map_div; //顯示的id
+        var currentCoord = currentCoord; //顯示的方位
+        var LngLat_arr = LngLat_arr; //tag 建築ＡＢＣ的位置
+        var alpha = alpha; //透明度
+        var continuous_show = continuous_show; //溫度篩選
+
+        chart.setOption({
+            mapbox3D: {
+                style: 'mapbox://styles/mapbox/streets-v9',
+                //style: 'mapbox://styles/biabobo/cjf6rw2dh3hkp2rotkknv42j3',
+                center: currentCoord, //param
+                zoom: 18, //all taipei:13
+                pitch: 60,
+                container: map_div, //param
+                // boxHeight: 25,
+                postEffect: {
+                    enable: true,
+                    SSAO: {
+                        enable: true,
+                        intensity: 1.2,
+                        radius: 6,
+                        quality: 'high'
+                    },
+                },
+                shading:'realistic',
+                light: {
+                    main: {
+                        // color: '#000',
+                        intensity: 3,
+                        shadow: true,
+                        shadowQuality: 'high',
+                        alpha: 33,
+
+                    },
+                    ambient: {
+                        intensity: 0,
+                        // color: '#fbfed6'
+                    },
+                    ambientCubemap: { //環境光
+                        // texture: './resource/fin4_Env.hdr',
+                        // texture: './resource/2.hdr',
+                        // texture: './resource/Mt-Washington-Hotel-Lookout_Env.hdr',
+                        exposure: 1,
+                        diffuseIntensity: 0.5,
+                        specularIntensity: 1
+                        // diffuseIntensity: 1
+                    },
+                    groundPlane: {
+                        show: false,
+                        color: '#333'
+                    },
+                    viewControl: {
+                        minBeta: -180,
+                        maxBeta: 180,
+                        alpha: 10, //视角
+                        beta:60, //视角绕 y 轴，即左右旋转的角度。
+                        center: [50, 0, -10],
+                        distance: 30,
+
+                        projection: "perspective", //正交投影'orthographic' 透视投影perspective
+                        minDistance: 5,
+                        maxDistance: 400,
+
+                        panMouseButton: 'left',
+                        rotateMouseButton: 'right',
+                        zoomSensitivity: 1
+                    },
+                }
+            },
+            legend: [{
+                type: 'plain',
+                show: false,
+                textStyle: {
+                    color: 'black'
+                }
+            }],
+            visualMap: {
+                type: 'continuous',
+                show: continuous_show, // param 溫度刪選顯示
+                min: 0,
+                max: 45,
+                dimension: 3,
+                seriesIndex: 0, //series:[]圖層
+                calculable: true,
+                realtime: true,
+                text: ['Temperature', ''],
+                right: 20,
+                bottom: 40,
+                textStyle: { 'color': 'black' },
+                inRange: {
+                    symbolSize: [0.5, 15],
+                    color: ['#107388', '#3c93a7','#67b4c5','#42a95e','#61ba6a','#bbdf88','#f3d477','#ea9e39','#ef5035','#750207','#7e279b'],
+                    colorAlpha: [0.2, 1]
+                },
+                formatter: function (value) {
+                    return value.toFixed(2) + ' ℃';
+                }
+            },
+            series: [
+                {
+                    name: 'Temperature',
+                    type: 'scatter3D',
+                    coordinateSystem: 'mapbox3D',
+                    symbol: 'circle',
+                    xAxis3D: {
+                        type: 'value'
+                    },
+                    yAxis3D: {
+                        type: 'value'
+                    },
+                    zAxis3D: {
+                        type: 'value'
+                    },
+                    data: sTemperatureDatas, //**3D dot data
+                    itemStyle: {
+                        opacity:alpha // *3d data透明度 param
+                        // borderColor: '#fff',//邊框色
+                        // borderWidth: 0.1
+                    },
+                    formatter: "test",
+                }
+            ]
+        }, true);
+
+        // chart.setOption(getLightillFaceData(createScatterData(sTemperatureDatas)));//data亂數
+        // chart.setOption(getLightillFaceData(sTemperatureDatas));//data寫死
+        var map = chart.getModel().getComponent("mapbox3D")._mapbox;
+
+        // -------- popup note --------
+        $('.mapboxgl-popup').remove(); // init
+        for(var i=0 ; i<=2; i++){  
+                        
+            // var note_arr = ;  
+            var markerHeight = LngLat_arr[i].markerHeight, // param 
+                markerRadius = 50, 
+                linearOffset = 30;
+            var popupOffsets = {
+             'top': [0, 0],
+             'top-left': [0,0],
+             'top-right': [0,0],
+             'bottom': [0, -markerHeight],
+             'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+             'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+             'left': [markerRadius, (markerHeight - markerRadius) * -1],
+             'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+             }; //CSS transform: translate(-50%, -100%) translate(756px, 261px);
+            var popup = new mapboxgl.Popup({
+                    offset: popupOffsets, 
+                    className: 'my-class', 
+                    closeButton:false, 
+                    closeOnClick: false
+                }).setLngLat(LngLat_arr[i].LngLat)
+                  .setHTML("<h6>"+ LngLat_arr[i].name +"</h6>")
+                  .addTo(map);
+        }
+        // -------- popup note END --------
+
+        //mapbox 3d building
+        map.on('load', function() {
+            //可旋轉
+            // var nav = new mapboxgl.NavigationControl({'option':{'visualizePitch':true}});
+            // map.addControl(nav, 'top-right');
+            // map.dragRotate.enable();
+
+            // Add zoom and rotation controls to the map.
+            // map.addControl(new mapboxgl.NavigationControl());
+
+
+            // Insert the layer beneath any symbol layer.
+            var layers = map.getStyle().layers;
+             
+            var labelLayerId;
+            for (var i = 0; i < layers.length; i++) {
+                if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+                    labelLayerId = layers[i].id;
+                    break;
+                }
+            }
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+                    // use an 'interpolate' expression to add a smooth transition effect to the
+                    // buildings as the user zooms in
+                    'fill-extrusion-height': [
+                        "interpolate", ["linear"], ["zoom"],
+                        15, 0,
+                        15.05, ["get", "height"]
+                    ],
+                    'fill-extrusion-base': [
+                        "interpolate", ["linear"], ["zoom"],
+                        15, 0,
+                        15.05, ["get", "min_height"]
+                    ],
+                    'fill-extrusion-opacity': .6
+                }
+            }, labelLayerId);
+        });
+
+    };
+    task_map1_load(); //預跑地圖一
+
+    // 四個地圖
+    function task_map1_load(){
+        $.getJSON("./building_data/task_r.json", function (temperature_datas) {
+            var sTemperatureDatas = temperature_datas;
+            var map_div = "map1"; //顯示的id
+            var currentCoord = [121.53540050, 25.039000];
+            var LngLat_arr = [{   
+                                name: "建築 A",
+                                markerHeight:180, 
+                                LngLat:[121.535090, 25.038650]
+                            },{   
+                                name: "建築 B",
+                                markerHeight:180, 
+                                LngLat:[121.535590, 25.038650]
+                            },{   
+                                name: "建築 C",
+                                markerHeight:180, 
+                                LngLat:[121.535800, 25.038650]
+                            }]; //tag 建築ＡＢＣ的位置
+            var alpha = 0.1; //透明度
+            var continuous_show = false; //溫度篩選
+            $('#sliderArea').hide(); //溫度篩選白底
+            loadBase(sTemperatureDatas, map_div, currentCoord, LngLat_arr, alpha, continuous_show);
+            $('#map1').show();
+        });
+    }
+
+    function task_map2_load(){
+        $.getJSON("./building_data/task_l3data.json", function (temperature_datas) {
+            var sTemperatureDatas = temperature_datas;
+
+            var map_div = "map2"; //顯示的id
+            var currentCoord = [121.533950, 25.038650];
+            var LngLat_arr = [{   
+                                name: "建築 A",
+                                markerHeight:140, 
+                                LngLat:[121.533490, 25.038650]
+                            },{   
+                                name: "建築 B",
+                                markerHeight:150, 
+                                LngLat:[121.533800, 25.038650]
+                            },{   
+                                name: "建築 C",
+                                markerHeight:160, 
+                                LngLat:[121.534200, 25.038650]
+                            }]; //tag 建築ＡＢＣ的位置
+            var alpha = 1; //透明度
+            var continuous_show = false; //溫度篩選
+            $('#sliderArea').hide(); //溫度篩選白底
+            loadBase(sTemperatureDatas, map_div, currentCoord, LngLat_arr, alpha, continuous_show);
+            $('#map1').hide();
+            $('#map2').show();
+        });
+    }
+
+    function task_map3_load(){
+        $.getJSON("./building_data/task_mldata.json", function (temperature_datas) { //old:dot_data_same_height.json dot_data3.json  dot_data2.json  illu_data.json
+            var sTemperatureDatas = temperature_datas;
+            var map_div = "map3"; //顯示的id
+            var currentCoord = [121.5343050, 25.038700];
+            var LngLat_arr = [{   
+                                name: "建築 A",
+                                markerHeight:150, 
+                                LngLat:[121.533800, 25.038650]
+                            },{   
+                                name: "建築 B",
+                                markerHeight:160, 
+                                LngLat:[121.534200, 25.038650]
+                            },{   
+                                name: "建築 C",
+                                markerHeight:180, 
+                                LngLat:[121.534690, 25.038650]
+                            }]; //tag 建築ＡＢＣ的位置
+            var alpha = .1; //透明度
+            var continuous_show = true; //溫度篩選
+            $('#sliderArea').show(); //溫度篩選白底
+            loadBase(sTemperatureDatas, map_div, currentCoord, LngLat_arr, alpha, continuous_show);
+            
+            $('#map2').hide();
+            $('#map3').show();
+        });
+    }
+
+    function task_map4_load(){
+        $.getJSON("./building_data/task_mrdata.json", function (temperature_datas) {
+            var sTemperatureDatas = temperature_datas;
+
+            var map_div = "map4"; //顯示的id
+            var currentCoord = [121.5346650, 25.038700];
+            var LngLat_arr = [{   
+                                name: "建築 A",
+                                markerHeight:160, 
+                                LngLat:[121.534200, 25.038650]
+                            },{   
+                                name: "建築 B",
+                                markerHeight:180, 
+                                LngLat:[121.534690, 25.038650]
+                            },{   
+                                name: "建築 C",
+                                markerHeight:180, 
+                                LngLat:[121.535090, 25.038650]
+                            }]; //tag 建築ＡＢＣ的位置
+            var alpha = 1; //透明度
+            var continuous_show = true; //溫度篩選
+            $('#sliderArea').show(); //溫度篩選白底
+            loadBase(sTemperatureDatas, map_div, currentCoord, LngLat_arr, alpha, continuous_show);
+            
+            $('#map3').hide();
+            $('#map4').show();
+        });
+    }
+
+    // 跑地圖
+    function task_map_load(num){
+       switch(num){
+        case 1:
+            task_map1_load();
+            break;
+        case 2:
+            task_map2_load();
+            break;
+        case 3:
+            task_map3_load();
+            break;
+        case 4:
+            task_map4_load();
+            break;
+       } 
+    }
+
+    document.ontouchmove = function (e) { e.preventDefault(); }
+    window.onresize = chart.resize;
+    $(function(){
+        // $("<div id='sliderArea'></div>").appendTo($('canvas').data('zr-dom-id')
+        $("<div id='sliderArea'></div>").appendTo($('#map div:eq(0)'))
+    });
+</script>
+<!-- font -->
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'ogl2zsn',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+</html>
+
