@@ -343,7 +343,7 @@ html {
 .radio_padding{
     display: inline-block;
     width: 77px;
-    padding: 0 7px 0 0;
+    padding: 0 0 0 10px;
     /*background-color: #eee;*/
 }
 .radio_padding:nth-child(odd){
