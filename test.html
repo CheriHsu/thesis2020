@@ -946,9 +946,9 @@
 <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
 <script type="text/javascript">
     var user_response = {};
-        user_response.user_info = {},           //基本資料
-        user_response.user_cognitive_test = {}, //視覺認知
-        user_response.user_alpha_task = {};   //透明度任務
+        // user_response.user_info = {},           //基本資料
+        // user_response.user_cognitive_test = {}, //視覺認知
+        // user_response.user_alpha_task = {};   //透明度任務
 
 
     //顯示倒數時間
@@ -1000,7 +1000,7 @@
             $('#step_2_div').show();
             
             // 紀錄基本資料
-            user_response.user_info = {
+            user_response = {
                 name: $('input[name="name"]').val(),
                 phone: $('input[name="phone"]').val(),
                 email: $('input[name="email"]').val(),
@@ -1068,7 +1068,7 @@
         if ( $(this).data('task') == "p"){
             start_p();//開始Ｐ說明
         } else if($(this).data('task') == "s"){
-            start_s();//開始S說明
+            start_s();//開S說明
         } else if($(this).data('task') == "alpha"){
             start_alpha();//開始Alpha說明
         };
@@ -1077,7 +1077,7 @@
     //開始Ｐ說明 紀錄CF
     function start_p(){
         stopwatch.stop(); // 停止ＣＦ計時
-        var user_cognitive_test = user_response.user_cognitive_test;
+        var user_cognitive_test = user_response;
         user_cognitive_test.cf_time = ($('.stopwatch').text())//作答時間累計
         // 紀錄ＣＦ分數
         user_cognitive_test.cf = [];
@@ -1155,7 +1155,7 @@
     //開始S說明 紀錄P分數
     function start_s(){
         stopwatch.stop(); // 停止P計時
-        var user_cognitive_test = user_response.user_cognitive_test;
+        var user_cognitive_test = user_response;
         user_cognitive_test.p_time = ($('.stopwatch').text())//作答時間累計
 
         // 紀錄P分數
@@ -1216,7 +1216,7 @@
     //開始alpha說明 紀錄S分數
     function start_alpha(){
         stopwatch.stop(); // 停止S計時
-        var user_cognitive_test = user_response.user_cognitive_test;
+        var user_cognitive_test = user_response;
         user_cognitive_test.s_time = ($('.stopwatch').text())//作答時間累計
 
         // 紀錄S分數
@@ -1266,7 +1266,7 @@
         // console.log(next_map_num)
         // console.log(next_item)
         stopwatch.stop(); // 停止計時
-        var user_alpha_task = user_response.user_alpha_task;
+        var user_alpha_task = user_response;
         user_alpha_task[item] = $('input[name="'+item+'"]:checked').val() || null; //紀錄map_q1.q2.q3
         user_alpha_task[item+"_time"] = ($('.stopwatch').text())//作答時間累計
         
@@ -1308,7 +1308,7 @@
     
     // 比對視覺認知測驗答案
     function check_cognitive_ans(){
-        var user_cognitive_test = user_response.user_cognitive_test;
+        var user_cognitive_test = user_response;
         // 認知答案
         var cognitive_ans = { 
             cf:["A", "B", "A", "E", "B", "C", "D", "B", "E", "D", "A", "C", "D", "E", "C", "E"],
@@ -1390,7 +1390,7 @@
 
     // 比對透明度任務答案
     function check_alpha_ans(){
-        var user_alpha_task = user_response.user_alpha_task;
+        var user_alpha_task = user_response;
         // 認知答案
         var alpha_ans = {
             map1_q1:["3"],
@@ -1480,12 +1480,12 @@
     //  送出結果 to firebase // 紀錄slider問卷
     $('#slider_question_div').on('click', '#finish_btn', function(){
         // 紀錄slider問卷
-        user_response.user_alpha_task.slider_q1 = $('input[name="slider_q1"]:checked').val() || null;
-        user_response.user_alpha_task.slider_q2 = $('input[name="slider_q2"]:checked').val() || null;
-        user_response.user_alpha_task.slider_q3 = $('input[name="slider_q3"]:checked').val() || null;
-        user_response.user_alpha_task.slider_q4 = $('input[name="slider_q4"]:checked').val() || null;
-        user_response.user_alpha_task.slider_q5 = $('input[name="slider_q5"]:checked').val() || null;
-        user_response.user_alpha_task.other_opinions = $('textarea[name="other_opinions"]').val();
+        user_response.slider_q1 = $('input[name="slider_q1"]:checked').val() || null;
+        user_response.slider_q2 = $('input[name="slider_q2"]:checked').val() || null;
+        user_response.slider_q3 = $('input[name="slider_q3"]:checked').val() || null;
+        user_response.slider_q4 = $('input[name="slider_q4"]:checked').val() || null;
+        user_response.slider_q5 = $('input[name="slider_q5"]:checked').val() || null;
+        user_response.other_opinions = $('textarea[name="other_opinions"]').val();
 
         var myDate = new Date(),
             mytime = myDate.toLocaleTimeString(),     //獲取當前時間
