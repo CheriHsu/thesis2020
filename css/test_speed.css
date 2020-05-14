@@ -384,3 +384,10 @@ i {
  .displaynone{
   display: none;
  }
+
+.s_group{
+  margin-bottom: 60px;
+}  
+.s_group img{
+  width: 92%;
+}  
