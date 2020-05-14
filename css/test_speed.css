@@ -342,6 +342,7 @@ html {
 }
 .radio_padding{
     display: inline-block;
+    width: 77px;
     padding: 0 7px 0 0;
     /*background-color: #eee;*/
 }
