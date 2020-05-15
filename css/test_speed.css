@@ -287,6 +287,7 @@ html {
 }
 .p_group{
   float: left;
+  margin-bottom: 20px;
 }
 .p_group .custom-radio{
   /*margin-left: 10px;*/
