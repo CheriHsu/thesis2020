@@ -432,7 +432,7 @@
                 <h3 class="center">相同圖片測試作答說明</h3>
                 <p>
                     每題黑色直線的左側是圖題，需在右方A、B、C、D、E的五個圖案中，選擇與左邊相匹配的圖案。<br>
-                    每題選擇<span class="red">只有一個圖案</span>與左邊圖題的圖<span class="red">相匹配</span>。<br>
+                    每題選擇<span class="red">只有一個圖案</span>與左邊圖題的圖<span class="red">最相似匹配</span>。<br>
                     
                     參考下面一個範例：<br>
                 </p>
@@ -563,7 +563,7 @@
                 <h3 class="center">題型與操作說明</h3>
                 <p>
                     都市熱島效應形成原因之一來自於人口密集的都市開發，樹木和裸地減少，影響水蒸發的減少；<br>數幢連在一起的建築物屏風樓，讓風的變化和流動減少。<br>
-                    您會看到在虛擬三維的地理空間中，呈現了無人機在都市中探測了溫度數據，<br>回傳量測的位置與溫度高低，將會以包含溫度顏色的圓形點視覺化呈現在道路與建築物之間。<br>
+                    您會看到在虛擬三維的地理空間中，呈現了無人機在都市街道中探測了溫度數據，<br>回傳量測的位置與溫度高低，將會以包含溫度顏色的圓形點視覺化呈現在道路與建築物之間。<br>
                 </p>
                     <div class="center">
                         <!-- <img style="width: 500px" src="images/task_sample.jpg"> -->
@@ -577,12 +577,12 @@
                     <p>從地圖上的建築Ａ、建築Ｂ、建築Ｃ標籤下可以隱約看出建築的外型高度。(如虛線所示)</p>
                     <p>此題答案選擇：建築Ｃ </p>
                     <div class="center"><img  style="width: 720px" src="images/sample_q2.jpg"></div>
-                    <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                    <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                     <p>從地圖上可以透過顏色隱約看出紅色的高溫範圍分布在哪裡，並分辨出大小(如虛線所示)</p>
                     <p>此題答案選擇：建築Ｃ </p>
 
                     <div class="center"><img  style="width: 720px" src="images/sample_q3.jpg"></div>
-                    <b>Q3. 呈上題溫度最高且分佈範圍又廣又密集的範圍，哪一棟建築與其前方的高溫分布的距離是最遠？</b> 
+                    <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？</b> 
                     <p>從上題觀察出的高溫範圍分布，並再分辨出與前方建築的距離(如圖： D1 > Ｄ2的長度)</p>
                     <p>此題答案選擇：建築Ａ </p>
 
@@ -593,7 +593,7 @@
                 <!--  將滑鼠游標停在地圖的畫面中，長壓滑鼠左鍵並前後左右移動可平移查看地圖。<br>長壓滑鼠左鍵前後左右移動加上長壓鍵盤Ctrl鍵，可旋轉地圖觀看不同視角 -->
                 </p>
                 <p class="center">每一個資料視覺化地圖將有七個提問。<br>
-                請根據實驗呈現的四種地圖，依據任務操作與選擇答案作答。</p>
+                請根據實驗呈現的四種地圖，依據任務操作與選擇答案作答。如果不確定無需猜題，可選擇無法分辨。</p>
                 <input id="start_alpha_task_btn" data-task="" class="btn btn-primary center" type="button" name="" value="進行測驗">
             </div>
 
@@ -613,25 +613,25 @@
                             <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b1" value="1"><label for="map1_q1_b1">  建築Ａ</label>
                             <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b2" value="2"><label for="map1_q1_b2">  建築B</label> 
                             <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b3" value="3"><label for="map1_q1_b3">  建築C</label>
-                            <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b4" value="4"><label for="map1_q1_b4">  不知道</label> 
+                            <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b4" value="4"><label for="map1_q1_b4">  無法分辨</label> 
                         </div>
                     </div>
                     <div id="map1_q2" class="map1 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b1" value="1"><label for="map1_q2_b1">  建築Ａ</label>
                             <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b2" value="2"><label for="map1_q2_b2">  建築B</label> 
                             <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b3" value="3"><label for="map1_q2_b3">  建築C</label>
-                            <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b4" value="4"><label for="map1_q2_b4">  不知道</label> 
+                            <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b4" value="4"><label for="map1_q2_b4">  無法分辨</label> 
                         </div>
                     </div>
                     <div id="map1_q3" class="map1 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣又密集的範圍，哪一棟建築與其前方的高溫分布的距離是最遠？ </b> 
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
                         <div>
                             <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b1" value="1"><label for="map1_q3_b1">  建築Ａ</label>
                             <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b2" value="2"><label for="map1_q3_b2">  建築B</label> 
                             <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b3" value="3"><label for="map1_q3_b3">  建築C</label>
-                            <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b4" value="4"><label for="map1_q3_b4">  不知道</label> 
+                            <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b4" value="4"><label for="map1_q3_b4">  無法分辨</label> 
                         </div>
                     </div>
 
@@ -685,25 +685,25 @@
                             <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b1" value="1"><label for="map2_q1_b1">  建築Ａ</label>
                             <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b2" value="2"><label for="map2_q1_b2">  建築B</label> 
                             <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b3" value="3"><label for="map2_q1_b3">  建築C</label>
-                            <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b4" value="4"><label for="map2_q1_b4">  不知道</label> 
+                            <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b4" value="4"><label for="map2_q1_b4">  無法分辨</label> 
                         </div>
                     </div>
                     <div id="map2_q2" class="map2 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b1" value="1"><label for="map2_q2_b1">  建築Ａ</label>
                             <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b2" value="2"><label for="map2_q2_b2">  建築B</label> 
                             <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b3" value="3"><label for="map2_q2_b3">  建築C</label>
-                            <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b4" value="4"><label for="map2_q2_b4">  不知道</label> 
+                            <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b4" value="4"><label for="map2_q2_b4">  無法分辨</label> 
                         </div>
                     </div>
                     <div id="map2_q3" class="map2 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣又密集的範圍，哪一棟建築與其前方的高溫分布的距離是最遠？ </b> 
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
                         <div>
                             <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b1" value="1"><label for="map2_q3_b1">  建築Ａ</label>
                             <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b2" value="2"><label for="map2_q3_b2">  建築B</label> 
                             <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b3" value="3"><label for="map2_q3_b3">  建築C</label>
-                            <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b4" value="4"><label for="map2_q3_b4">  不知道</label> 
+                            <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b4" value="4"><label for="map2_q3_b4">  無法分辨</label> 
                         </div>
                     </div>
 
@@ -757,25 +757,25 @@
                             <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b1" value="1"><label for="map3_q1_b1">  建築Ａ</label>
                             <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b2" value="2"><label for="map3_q1_b2">  建築B</label> 
                             <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b3" value="3"><label for="map3_q1_b3">  建築C</label>
-                            <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b4" value="4"><label for="map3_q1_b4">  不知道</label> 
+                            <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b4" value="4"><label for="map3_q1_b4">  無法分辨</label> 
                         </div>
                     </div>
                     <div id="map3_q2" class="map3 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b1" value="1"><label for="map3_q2_b1">  建築Ａ</label>
                             <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b2" value="2"><label for="map3_q2_b2">  建築B</label>
                             <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b3" value="3"><label for="map3_q2_b3">  建築C</label>
-                            <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b4" value="4"><label for="map3_q2_b4">  不知道</label>
+                            <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b4" value="4"><label for="map3_q2_b4">  無法分辨</label>
                         </div>
                     </div>
                     <div id="map3_q3" class="map3 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣又密集的範圍，哪一棟建築與其前方的高溫分布的距離是最遠？ </b> 
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
                         <div>
                             <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b1" value="1"><label for="map3_q3_b1">  建築Ａ</label>
                             <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b2" value="2"><label for="map3_q3_b2">  建築B</label> 
                             <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b3" value="3"><label for="map3_q3_b3">  建築C</label>
-                            <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b4" value="4"><label for="map3_q3_b4">  不知道</label>
+                            <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b4" value="4"><label for="map3_q3_b4">  無法分辨</label>
                         </div>
                     </div>
 
@@ -829,25 +829,25 @@
                             <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b1" value="1"><label for="map4_q1_b1">  建築Ａ</label>
                             <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b2" value="2"><label for="map4_q1_b2">  建築B</label> 
                             <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b3" value="3"><label for="map4_q1_b3">  建築C</label>
-                            <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b4" value="4"><label for="map4_q1_b4">  不知道</label> 
+                            <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b4" value="4"><label for="map4_q1_b4">  無法分辨</label> 
                         </div>
                     </div>
                     <div id="map4_q2" class="map4 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈範圍又廣又密集？</b> 
+                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b1" value="1"><label for="map4_q2_b1">  建築Ａ</label>
                             <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b2" value="2"><label for="map4_q2_b2">  建築B</label> 
                             <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b3" value="3"><label for="map4_q2_b3">  建築C</label>
-                            <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b4" value="4"><label for="map4_q2_b4">  不知道</label> 
+                            <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b4" value="4"><label for="map4_q2_b4">  無法分辨</label> 
                         </div>
                     </div>
                     <div id="map4_q3" class="map4 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣又密集的範圍，哪一棟建築與其前方的高溫分布的距離是最遠？ </b>
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b>
                         <div> 
                             <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b1" value="1"><label for="map4_q3_b1">  建築Ａ</label>
                             <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b2" value="2"><label for="map4_q3_b2">  建築B</label> 
                             <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b3" value="3"><label for="map4_q3_b3">  建築C</label>
-                            <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b4" value="4"><label for="map4_q3_b4">  不知道</label>
+                            <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b4" value="4"><label for="map4_q3_b4">  無法分辨</label>
                         </div>
                     </div>
 
@@ -1000,7 +1000,7 @@
             </div>
             <div class="modal-body">
                 <p class="center">接下來，在地圖三與地圖四的右下角會出現溫度篩選功能。</p>
-                <b class="center">您可以選擇使用溫度篩選功能來協助您任務作答。</b>
+                <b class="center">您可以使用溫度篩選功能來協助您任務作答。</b>
                 <div class="center"><img  style="width: 400px" src="images/temperature_slider_filter.jpg"></div>
                 <div class="center"><img  style="width: 400px" src="images/sample_slider.jpg"></div>
             </div>
