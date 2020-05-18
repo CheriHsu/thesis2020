@@ -30,11 +30,19 @@ $(function(){
 					"slider_q1", "slider_q2", "slider_q3", "slider_q4", "slider_q5" ,"other_opinions"
 					]
 
-		var csv_data_arr=[];
+			var csv_data_arr=[];
 		for (var j = 0 ; j<convert_arr.length; j++){
 			var csv_data={};
+			csv_data["fire_id"] = convert_arr[j][0]
 			for (var i in item){
-				csv_data[item[i]] = convert_arr[j][1][item[i]]
+				if (item[i].substr(-5,5) == "_time"){
+					var time = convert_arr[j][1][item[i]]
+					var cs_time = Number(time.split(":")[0])*6000 + Number(time.split(":")[1])*100 + Number(time.split(":")[2]); //換cs厘秒
+					// console.log(cs_time)
+					csv_data[item[i]] = cs_time;
+				} else {
+					csv_data[item[i]] = convert_arr[j][1][item[i]]
+				}
 			}
 			csv_data_arr.push(csv_data)
 		}
