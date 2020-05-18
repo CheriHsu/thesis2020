@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>firebase data convert</title>
+    <script src="js/jquery-3.4.1.min.js"></script>  
+</head>
+<body>
+	<div id="json_form"><!-- append --></div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(function(){
+
+	$.getJSON("./thesis-test2020-questionnaire0515-export.json", function (fire_data) {
+		
+		// var convert_arr = Object.keys(fire_data).map(function(key) {
+		// 				  return [fire_data[key]];
+		// 			});
+
+		var convert_arr = Object.entries(fire_data);
+		console.log(convert_arr);
+		
+		var item = ["mem_id", "name", "phone", "email", "sex", "age", "edu", "skill", "skill_other", "use", "device", "cf_match_length", "cf_time", "p_match_length", "p_time", "s_match_length", "s_time", 
+					"map1_q1_match", "map1_q1_time", "map1_q2_match", "map1_q2_time", "map1_q3_match", "map1_q3_time", "map1_q4", "map1_q5", "map1_q6", "map1_q7",
+					"map2_q1_match", "map2_q1_time", "map2_q2_match", "map2_q2_time", "map2_q3_match", "map2_q3_time", "map1_q4", "map1_q5", "map1_q6", "map1_q7",
+					"map3_q1_match", "map3_q1_time", "map3_q2_match", "map3_q2_time", "map3_q3_match", "map3_q3_time", "map1_q4", "map1_q5", "map1_q6", "map1_q7",
+					"map4_q1_match", "map4_q1_time", "map4_q2_match", "map4_q2_time", "map4_q3_match", "map4_q3_time", "map1_q4", "map1_q5", "map1_q6", "map1_q7",
+					"slider_q1", "slider_q2", "slider_q3", "slider_q4", "slider_q5" ,"other_opinions"
+					]
+
+		var csv_data_arr=[];
+		for (var j = 0 ; j<convert_arr.length; j++){
+			var csv_data={};
+			for (var i in item){
+				csv_data[item[i]] = convert_arr[j][1][item[i]]
+			}
+			csv_data_arr.push(csv_data)
+		}
+		console.log(csv_data)
+		console.log(csv_data_arr)
+
+		var json_form = JSON.stringify(csv_data_arr);
+		$('#json_form').text(json_form);
+	})	
+})
+
+</script>
