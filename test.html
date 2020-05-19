@@ -1547,7 +1547,7 @@
     // }
 
     firebase.initializeApp(firebaseConfig);
-    var questionnaire0515 = firebase.database().ref('questionnaire0515');
+    var questionnaire0520 = firebase.database().ref('questionnaire0520');
 
     //  送出結果 to firebase // 紀錄slider問卷
     $('#slider_question_div').on('click', '#finish_btn', function(){
@@ -1574,7 +1574,7 @@
 
         console.log(user_response)
         // 推推
-        questionnaire0515.push(user_response);
+        questionnaire0520.push(user_response);
         $('#step_3_div').hide();
         $('#step_4_div').show();
     });
