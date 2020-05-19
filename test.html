@@ -563,7 +563,7 @@
                 <h3 class="center">題型與操作說明</h3>
                 <p>
                     都市熱島效應形成原因之一來自於人口密集的都市開發，樹木和裸地減少，影響水蒸發的減少；<br>數幢連在一起的建築物屏風樓，讓風的變化和流動減少。<br>
-                    您會看到在虛擬三維的地理空間中，呈現了無人機在都市街道中探測了溫度數據，<br>回傳量測的位置與溫度高低，將會以包含溫度顏色的圓形點視覺化呈現在道路與建築物之間。<br>
+                    您會看到在虛擬三維的地理空間中，呈現了無人機在都市街道中探測了溫度數據，<br>回傳量測的位置與溫度高低，將會以包含溫度顏色的圓形點視覺化呈現在道路與建築物之間的關係。<br>
                 </p>
                     <div class="center">
                         <!-- <img style="width: 500px" src="images/task_sample.jpg"> -->
@@ -573,17 +573,17 @@
 
                     <p>以下範例，為每種地圖都會問的前三種問題：</p>
                     <div class="center"><img  style="width: 720px" src="images/sample_q1.jpg"></div>
-                    <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
-                    <p>從地圖上的建築Ａ、建築Ｂ、建築Ｃ標籤下可以隱約看出建築的外型高度。(如虛線所示)</p>
+                    <b>Q1. 請辨識在街道旁的A、B、C建築，哪一棟最高？</b> 
+                    <p>此測驗目的要測驗您對複雜堆疊中背景圖的視覺辨識度，從地圖上的建築Ａ、建築Ｂ、建築Ｃ標籤下可以隱約看出建築的外型高度。(如虛線所示)</p>
                     <p>此題答案選擇：建築Ｃ </p>
                     <div class="center"><img  style="width: 720px" src="images/sample_q2.jpg"></div>
-                    <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
-                    <p>從地圖上可以透過顏色隱約看出紅色的高溫範圍分布在哪裡，並分辨出大小(如虛線所示)</p>
+                    <b>Q2. 請辨識哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
+                    <p>此測驗目的要測驗您對顏色閉合的視覺認知度，從地圖上可以透過顏色隱約看出紅色的高溫範圍分布在哪裡，並分辨出大小(如虛線所示)</p>
                     <p>此題答案選擇：建築Ｃ </p>
 
                     <div class="center"><img  style="width: 720px" src="images/sample_q3.jpg"></div>
-                    <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？</b> 
-                    <p>從上題觀察出的高溫範圍分布，並再分辨出與前方建築的距離(如圖： D1 > Ｄ2的長度)</p>
+                    <b>Q3. 呈上題溫度最高且分佈範圍又廣的熱團範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？</b> 
+                    <p>此測驗目的要測驗您對空間距離的視覺認知度，從上題觀察出的高溫熱團範圍分布，並再分辨出與前方建築的距離後相比較(如圖： D1 > Ｄ2的長度)</p>
                     <p>此題答案選擇：建築Ａ </p>
 
                     <!-- <div class="center">
@@ -608,7 +608,7 @@
                 <div id="task_map1" class="task_map">   
                     <h6>地圖一</h6>
                     <div id="map1_q1" class=" padding10">
-                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <b>Q1. 請辨識在街道旁的A、B、C建築，哪一棟最高？</b> 
                         <div>
                             <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b1" value="1"><label for="map1_q1_b1">  建築Ａ</label>
                             <input name="map1_q1" class="map_radio" type="radio" id="map1_q1_b2" value="2"><label for="map1_q1_b2">  建築B</label> 
@@ -617,7 +617,7 @@
                         </div>
                     </div>
                     <div id="map1_q2" class="map1 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
+                        <b>Q2. 請辨識哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b1" value="1"><label for="map1_q2_b1">  建築Ａ</label>
                             <input name="map1_q2" class="map_radio" type="radio" id="map1_q2_b2" value="2"><label for="map1_q2_b2">  建築B</label> 
@@ -626,7 +626,7 @@
                         </div>
                     </div>
                     <div id="map1_q3" class="map1 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的熱團範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
                         <div>
                             <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b1" value="1"><label for="map1_q3_b1">  建築Ａ</label>
                             <input name="map1_q3" class="map_radio" type="radio" id="map1_q3_b2" value="2"><label for="map1_q3_b2">  建築B</label> 
@@ -680,7 +680,7 @@
                 <div id="task_map2" class="task_map" style="display: none;">   
                     <h6>地圖二</h6>
                     <div id="map2_q1" class=" padding10">
-                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <b>Q1. 請辨識在街道旁的A、B、C建築，哪一棟最高？</b> 
                         <div>
                             <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b1" value="1"><label for="map2_q1_b1">  建築Ａ</label>
                             <input name="map2_q1" class="map_radio" type="radio" id="map2_q1_b2" value="2"><label for="map2_q1_b2">  建築B</label> 
@@ -689,7 +689,7 @@
                         </div>
                     </div>
                     <div id="map2_q2" class="map2 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
+                        <b>Q2. 請辨識哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b1" value="1"><label for="map2_q2_b1">  建築Ａ</label>
                             <input name="map2_q2" class="map_radio" type="radio" id="map2_q2_b2" value="2"><label for="map2_q2_b2">  建築B</label> 
@@ -698,7 +698,7 @@
                         </div>
                     </div>
                     <div id="map2_q3" class="map2 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的熱團範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
                         <div>
                             <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b1" value="1"><label for="map2_q3_b1">  建築Ａ</label>
                             <input name="map2_q3" class="map_radio" type="radio" id="map2_q3_b2" value="2"><label for="map2_q3_b2">  建築B</label> 
@@ -752,7 +752,7 @@
                 <div id="task_map3" class="task_map" style="display: none;">   
                     <h6>地圖三</h6>
                     <div id="map3_q1" class=" padding10">
-                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <b>Q1. 請辨識在街道旁的A、B、C建築，哪一棟最高？</b> 
                         <div>
                             <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b1" value="1"><label for="map3_q1_b1">  建築Ａ</label>
                             <input name="map3_q1" class="map_radio" type="radio" id="map3_q1_b2" value="2"><label for="map3_q1_b2">  建築B</label> 
@@ -761,7 +761,7 @@
                         </div>
                     </div>
                     <div id="map3_q2" class="map3 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
+                        <b>Q2. 請辨識哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b1" value="1"><label for="map3_q2_b1">  建築Ａ</label>
                             <input name="map3_q2" class="map_radio" type="radio" id="map3_q2_b2" value="2"><label for="map3_q2_b2">  建築B</label>
@@ -770,7 +770,7 @@
                         </div>
                     </div>
                     <div id="map3_q3" class="map3 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的熱團範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b> 
                         <div>
                             <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b1" value="1"><label for="map3_q3_b1">  建築Ａ</label>
                             <input name="map3_q3" class="map_radio" type="radio" id="map3_q3_b2" value="2"><label for="map3_q3_b2">  建築B</label> 
@@ -824,7 +824,7 @@
                 <div id="task_map4" class="task_map" style="display: none;">   
                     <h6>地圖四</h6>
                     <div id="map4_q1" class=" padding10">
-                        <b>Q1. 在呈現量測溫度數據範圍背後的建築，哪一棟最高？</b> 
+                        <b>Q1. 請辨識在街道旁的A、B、C建築，哪一棟最高？</b> 
                         <div>
                             <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b1" value="1"><label for="map4_q1_b1">  建築Ａ</label>
                             <input name="map4_q1" class="map_radio" type="radio" id="map4_q1_b2" value="2"><label for="map4_q1_b2">  建築B</label> 
@@ -833,7 +833,7 @@
                         </div>
                     </div>
                     <div id="map4_q2" class="map4 padding10">
-                        <b>Q2. 在呈現量測溫度數據範圍背後的建築，哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
+                        <b>Q2. 請辨識哪一棟建築前方溫度最高且分佈面積範圍又廣？</b> 
                         <div>                        
                             <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b1" value="1"><label for="map4_q2_b1">  建築Ａ</label>
                             <input name="map4_q2" class="map_radio" type="radio" id="map4_q2_b2" value="2"><label for="map4_q2_b2">  建築B</label> 
@@ -842,7 +842,7 @@
                         </div>
                     </div>
                     <div id="map4_q3" class="map4 padding10">
-                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的立體範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b>
+                        <b>Q3. 呈上題溫度最高且分佈範圍又廣的熱團範圍，哪一棟建築與其前方的高溫團分布的距離是最遠？ </b>
                         <div> 
                             <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b1" value="1"><label for="map4_q3_b1">  建築Ａ</label>
                             <input name="map4_q3" class="map_radio" type="radio" id="map4_q3_b2" value="2"><label for="map4_q3_b2">  建築B</label> 
@@ -1000,7 +1000,7 @@
             </div>
             <div class="modal-body">
                 <p class="center">接下來，在地圖三與地圖四的右下角會出現溫度篩選功能。</p>
-                <b class="center">您可以使用溫度篩選功能來協助您任務作答。</b>
+                <b class="center">請使用溫度篩選功能，將下方篩選器調節至34度以上，來協助您辨識任務作答。</b>
                 <div class="center"><img  style="width: 400px" src="images/temperature_slider_filter.jpg"></div>
                 <div class="center"><img  style="width: 400px" src="images/sample_slider.jpg"></div>
             </div>
