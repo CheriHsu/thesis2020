@@ -403,3 +403,10 @@ i {
 #cf_items .center img:nth-child(4){
   height: 120px;
 }
+
+@media (min-width: 576px){
+  .modal-dialog {
+      max-width: 700px;
+      margin: 1.75rem auto;
+  }
+}
