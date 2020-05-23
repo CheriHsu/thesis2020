@@ -1005,7 +1005,7 @@
                     可過濾溫度顏色，透過過濾顏色之後來觀察後方建築背景以及溫度之範圍。<br>
                     (如下方兩張圖片所示)</div>
                 <div class="center"><img  style="width: 400px" src="images/temperature_slider_filter.jpg"></div>
-                <div class="center"><img  style="width: 600px" src="images/sample_slider.jpg"></div>
+                <div class="center"><img  style="width: 600px" src="images/show_slider.gif"></div>
                 
             </div>
             <b class="center">請先使用溫度篩選功能之後來進行作答。<br>作答無須猜題，不清楚請選則無法辨識。</b>
@@ -1718,6 +1718,14 @@
         // chart.setOption(getLightillFaceData(createScatterData(sTemperatureDatas)));//data亂數
         // chart.setOption(getLightillFaceData(sTemperatureDatas));//data寫死
         var map = chart.getModel().getComponent("mapbox3D")._mapbox;
+        // setup map layer
+        map.boxZoom.disable();
+        map.scrollZoom.disable();
+        map.dragPan.disable();
+        map.dragRotate.disable();
+        map.doubleClickZoom.disable();
+        map.doubleClickZoom.disable();
+        map.doubleClickZoom.disable();
 
         // -------- popup note --------
         $('.mapboxgl-popup').remove(); // init
